@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Gesti.Pedi</string>
+    <string name="Title">Gesti.Pedi</string>
+    <string name="stock_text">Stock</string>
+    <string name="orders_text">Pedidos</string>
+    <string name="logo">Logo</string>
+    <string name="imgstock">imgstock</string>
+    <string name="imgclients">imgClientes</string>
+    <string name="imgorders">imgPedidos</string>
+    <string name="add_client">Añadir Cliente</string>
+    <string name="clients_title">Clientes</string>
+    <string name="email">Email:</string>
+    <string name="name">Nombre:</string>
+    <string name="dniClient">DNI:</string>
+    <string name="addClientButtonTitle">Añadir Clientes</string>
+    <string name="editClientButtonTitle">Editar Cliente</string>
+    <string name="logInTitle">Iniciar Sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="editProductTitle2">Editar Producto</string>
+    <string name="descriptionTitle">Descripción</string>
+    <string name="description">Descripción:</string>
+    <string name="category">Categoria:</string>
+    <string name="stock">Stock:</string>
+    <string name="price">Precio:</string>
+    <string name="lastNameE">Apellidos:</string>
+    <string name="enterprise">Empresa:</string>
+    <string name="cp">CP:</string>
+    <string name="address">Dirección:</string>
+    <string name="city">Ciudad:</string>
+    <string name="country">País:</string>
+    <string name="phone">Telefono:</string>
+    <string name="save">Guardar</string>
+    <string name="imageproduct">imageProduct</string>
+    <string name="selectImage">Seleccionar Imagen</string>
+    <string name="add">Añadir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="client_detail">Detalles Cliente</string>
+    <string name="delete">Eliminar</string>
+    <string name="username">Usuario:</string>
+    <string name="password">Contraseña:</string>
+    <string name="product_detail">Detalles Producto</string>
+    <string name="add_producto">Añadir Producto</string>
+    <string name="products">Productos</string>
+    <string name="buscar">Buscar</string>
+    <string name="search_name">Buscar por Nombre</string>
+    <string name="orders">Pedidos</string>
+    <string name="create_order">Crear Pedido</string>
+    <string name="shoppingCart">Carrito</string>
+    <string name="confirmOrder">Confirmar Pedido</string>
+    <string name="users">Users</string>
+    <string name="addCategory">Añadir Categoria</string>
+    <string name="category_detail">Detalle Categoria</string>
+    <string name="edit_category">Editar Categoria</string>
+    <string name="register_Admin">Registrar Administrador</string>
+    <string name="increase">increase</string>
+    <string name="decrease">decrease</string>
+    <string name="selectClient">Seleccionar Cliente</string>
+    <string name="searchEnterprise">Buscar por Empresa</string>
+    <string name="orderDetailTitle">Detalle Pedido</string>
+    <string name="n_order">NºPedido:</string>
+    <string name="clienttv">Cliente:</string>
+    <string name="datetv">Fecha:</string>
+    <string name="statetv">Estado:</string>
+    <string name="usertv">Usuario:</string>
+    <string name="totaltv">Total:</string>
+    <string name="editOrderbtntext">Editar Pedido</string>
+    <string name="sendOrderbtntext">Enviar Pedido</string>
+    <string name="cancelOrderbtntext">Cancelar Pedido</string>
+    <string name="products_title">Productos</string>
+    <string name="add_order_btntext">Añadir Pedido</string>
+    <string name="cancel_orderbtntext">Cancelar Pedido</string>
+    <string name="addProductTitle">Añadir Producto</string>
+    <string name="editProductTitle">Editar Producto</string>
+    <string name="editProfile">Editar Perfil</string>
+    <string name="registrerAdmin">Registrar Administrador</string>
+    <string name="profile">Perfil</string>
+    <string name="categories">Categorias</string>
+
+
+    <string-array name="states_array">
+        <item>Todos</item>
+        <item>En Proceso</item>
+        <item>Confirmado</item>
+        <item>Enviado</item>
+        <item>Cancelado</item>
+    </string-array>
+
+    <string-array name="labels_array_search">
+        <item>All</item>
+        <item>Perros</item>
+        <item>Gatos</item>
+        <item>Peces</item>
+    </string-array>
+</resources>

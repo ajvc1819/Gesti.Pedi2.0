@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "53912738057",
+    "project_id": "gestipediimage",
+    "storage_bucket": "gestipediimage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53912738057:android:f0b509a817ecebe857dbd8",
+        "android_client_info": {
+          "package_name": "com.anjovaca.gestipedi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53912738057-81unc5o61ftu6bs42mld83nfj36vnpmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgVSNhBEgmjMVVehdwfyDP9_9OUzvUQro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53912738057-81unc5o61ftu6bs42mld83nfj36vnpmm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

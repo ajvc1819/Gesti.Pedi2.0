@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.anjovaca.gestipedi.Main.MainActivity">
+
+    <item
+        android:id="@+id/Category"
+        android:orderInCategory="150"
+        android:title="@string/categories"
+        android:icon="@drawable/category"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/ShoppingCart"
+        android:orderInCategory="100"
+        android:title="@string/shoppingCart"
+        android:icon="@drawable/shopping_cart_icon"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/Users"
+        android:orderInCategory="150"
+        android:title="@string/registrerAdmin"
+        android:icon="@drawable/add_administrator"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/initSession"
+        android:orderInCategory="250"
+        android:title="@string/profile"
+        android:icon="@drawable/init_session_icon"
+        app:showAsAction="always" />
+</menu>

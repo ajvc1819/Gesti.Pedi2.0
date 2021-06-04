@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2B2B"
+    tools:context=".Main.FirstFragment">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/title_border"
+        android:gravity="center|center_vertical"
+        android:text="@string/Title"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnClientes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/buttons_border"
+        android:gravity="bottom|center"
+        android:onClick="launchClientes"
+        android:paddingBottom="50dp"
+        android:text="@string/clients_title"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btnPedidos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnStock"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/btnStock"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/buttons_border"
+        android:gravity="bottom|center"
+        android:onClick="launchStock"
+        android:paddingBottom="50dp"
+        android:text="@string/stock_text"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btnPedidos"
+        app:layout_constraintEnd_toStartOf="@+id/btnClientes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/btnPedidos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/buttons_border"
+        android:gravity="bottom|center"
+        android:onClick="launchPedidos"
+        android:paddingBottom="50dp"
+        android:text="@string/orders_text"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStock"
+        tools:ignore="OnClick" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="107dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logotipo"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTitulo"
+        app:layout_constraintStart_toStartOf="@+id/txtTitulo"
+        app:layout_constraintTop_toTopOf="@+id/txtTitulo"
+        tools:srcCompat="@drawable/logotipo" />
+
+    <ImageView
+        android:id="@+id/imgStock"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="@string/imgstock"
+        android:src="@drawable/stock"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStock"
+        app:layout_constraintEnd_toEndOf="@+id/btnStock"
+        app:layout_constraintStart_toStartOf="@+id/btnStock"
+        app:layout_constraintTop_toTopOf="@+id/btnStock"
+        app:srcCompat="@drawable/stock" />
+
+    <ImageView
+        android:id="@+id/imgPedidos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="@string/imgorders"
+        android:src="@drawable/pedido"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPedidos"
+        app:layout_constraintEnd_toEndOf="@+id/btnPedidos"
+        app:layout_constraintStart_toStartOf="@+id/btnPedidos"
+        app:layout_constraintTop_toTopOf="@+id/btnPedidos"
+        tools:srcCompat="@drawable/pedido" />
+
+    <ImageView
+        android:id="@+id/imgClientes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="@string/imgclients"
+        android:src="@drawable/clientes"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClientes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btnClientes"
+        app:layout_constraintTop_toTopOf="@+id/btnClientes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

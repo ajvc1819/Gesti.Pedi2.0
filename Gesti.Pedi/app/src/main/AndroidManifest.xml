@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.anjovaca.gestipedi">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+        <activity android:name=".LogIn.EditProfile"
+            android:label="Editar Perfil"
+            android:parentActivityName=".LogIn.Profile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.LogIn.Profile" />
+        </activity>
+        <activity
+            android:name=".Order.SelectClientForOrder"
+            android:label="Seleccionar Cliente"
+            android:parentActivityName=".Order.OrderActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Order.OrderActivity" />
+        </activity>
+        <activity
+            android:name=".LogIn.RegisterAdministrator"
+            android:label="Registrar Administrador"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Category.EditCategory"
+            android:label="Editar Categoría"
+            android:parentActivityName=".Category.CategoryDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Category.CategoryDetail" />
+        </activity>
+        <activity
+            android:name=".Category.CategoryDetail"
+            android:label="Detalle Categoría"
+            android:parentActivityName=".Category.CategoryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Category.CategoryActivity" />
+        </activity>
+        <activity
+            android:name=".Category.AddCategory"
+            android:label="Añadir Categoría"
+            android:parentActivityName=".Category.CategoryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Category.CategoryActivity" />
+        </activity>
+        <activity
+            android:name=".Category.CategoryActivity"
+            android:label="Categorias"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Order.AddProductToShoppingCart"
+            android:label="Añadir Producto al Carrito"
+            android:parentActivityName=".Order.ShoppingCart">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Order.ShoppingCart" />
+        </activity>
+        <activity
+            android:name=".Order.ShoppingCart"
+            android:label="Carrito"
+            android:parentActivityName=".Client.ClientDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Client.ClientDetail" />
+        </activity>
+        <activity
+            android:name=".Order.OrderDetail"
+            android:label="Detalle Pedido"
+            android:parentActivityName=".Order.OrderActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Order.OrderActivity" />
+        </activity>
+        <activity
+            android:name=".Stock.EditProduct"
+            android:label="Editar Producto"
+            android:parentActivityName=".Stock.ProductDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Stock.ProductDetail" />
+        </activity>
+        <activity
+            android:name=".Stock.ProductDetail"
+            android:label="Detalles Producto"
+            android:parentActivityName=".Stock.StockActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Stock.StockActivity" />
+        </activity>
+        <activity
+            android:name=".Stock.AddProduct"
+            android:label="Añadir Producto"
+            android:parentActivityName=".Stock.StockActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Stock.StockActivity" />
+        </activity>
+        <activity
+            android:name=".LogIn.Profile"
+            android:label="Cerrar Sesión"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LogIn.Register"
+            android:label="Registrarse"
+            android:parentActivityName=".LogIn.LogIn">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.LogIn.LogIn" />
+        </activity>
+        <activity
+            android:name=".LogIn.LogIn"
+            android:label="Iniciar Sesión"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Client.EditClient"
+            android:label="Editar Cliente"
+            android:parentActivityName=".Client.ClientDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Client.ClientDetail" />
+        </activity>
+        <activity
+            android:name=".Client.ClientDetail"
+            android:label="Detalle Cliente"
+            android:parentActivityName=".Client.ClientActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Client.ClientActivity" />
+        </activity>
+        <activity
+            android:name=".Client.AddClient"
+            android:label="Añadir"
+            android:parentActivityName=".Client.ClientActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Client.ClientActivity" />
+        </activity>
+        <activity
+            android:name=".Stock.StockActivity"
+            android:label="Stock"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Order.OrderActivity"
+            android:label="Pedidos"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Client.ClientActivity"
+            android:label="Clientes"
+            android:parentActivityName=".Main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anjovaca.gestipedi.Main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Main.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
