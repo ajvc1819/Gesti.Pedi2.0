@@ -55,7 +55,7 @@
 
     <TextView
         android:id="@+id/tvUsuario"
-        android:layout_width="73dp"
+        android:layout_width="80dp"
         android:layout_height="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
@@ -67,7 +67,7 @@
 
     <TextView
         android:id="@+id/tvContraseña"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
@@ -85,11 +85,13 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toEndOf="@+id/tvUsuario"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        tools:targetApi="lollipop" />
 
     <EditText
         android:id="@+id/etContraseña"
@@ -97,13 +99,14 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
+        android:backgroundTint="#FFFFFF"
         android:inputType="textPassword"
         android:textColor="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvContraseña"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toEndOf="@+id/tvContraseña"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,UnusedAttribute" />
 
     <Button
         android:id="@+id/btnIniciarSesion"

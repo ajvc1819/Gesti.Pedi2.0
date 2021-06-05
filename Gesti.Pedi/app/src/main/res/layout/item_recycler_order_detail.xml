@@ -46,7 +46,7 @@
                     android:layout_marginBottom="20dp"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -67,7 +67,7 @@
                         android:layout_marginRight="5dp"
                         android:text="Cantidad:"
                         android:textColor="#FFFFFF"
-                        android:textSize="17sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tvCantidadSho"
@@ -78,7 +78,7 @@
                         android:layout_marginRight="5dp"
                         android:text="TextView"
                         android:textColor="#FFFFFF"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
                         tools:ignore="HardcodedText" />
 
                 </LinearLayout>
@@ -94,7 +94,7 @@
                     android:gravity="end"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
             </LinearLayout>

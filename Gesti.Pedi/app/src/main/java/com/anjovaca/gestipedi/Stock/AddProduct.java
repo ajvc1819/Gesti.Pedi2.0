@@ -1,6 +1,5 @@
 package com.anjovaca.gestipedi.Stock;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,22 +22,17 @@ import android.widget.Toast;
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.DbGestiPedi;
 import com.anjovaca.gestipedi.DB.Models.CategoryModel;
-import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.LogIn.LogIn;
 import com.anjovaca.gestipedi.LogIn.Profile;
 import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
 import com.anjovaca.gestipedi.Main.MainActivity;
 import com.anjovaca.gestipedi.Order.ShoppingCart;
 import com.anjovaca.gestipedi.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class AddProduct extends AppCompatActivity implements
@@ -186,7 +180,8 @@ public class AddProduct extends AppCompatActivity implements
                 dataPath.putFile(imageUri);
                 String urlImage = dataPath.getPath();
                 dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
-                finish();
+                Intent intent = new Intent(getApplicationContext(), StockActivity.class);
+                startActivity(intent);
             }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();

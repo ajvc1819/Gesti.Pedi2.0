@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -17,6 +18,7 @@ import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.DB.Models.UserModel;
 import com.anjovaca.gestipedi.DB.Models.OrderDetailModel;
 import com.anjovaca.gestipedi.DB.Models.OrderModel;
+import com.google.android.gms.common.internal.Objects;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -149,14 +151,14 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     }
 
     //Función que permite la eliminación de un cliente de la base de datos por su id.
-    public void deleteClient(int idClient) {
+    public void deleteClient(int idClient , Context context) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
                 db.execSQL("DELETE FROM Users WHERE id = '" + idClient + "'");
                 db.close();
             } catch (Exception ex) {
-                Log.d("Tag", ex.toString());
+                Toast.makeText(context, "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -305,14 +307,14 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     }
 
     //Función que premite la eliminación de un producto de la base de datos.
-    public void deleteProduct(int idProduct) {
+    public void deleteProduct(int idProduct, Context context) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
                 db.execSQL("DELETE FROM Products WHERE id = '" + idProduct + "'");
                 db.close();
             } catch (Exception ex) {
-                Log.d("Tag", ex.toString());
+                Toast.makeText(context, "No se puede eliminar el producto seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -673,14 +675,14 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     }
 
     //Función que permite la eliminación de categorías de la base de datos.
-    public void deleteCategory(int idCategory) {
+    public void deleteCategory(int idCategory, Context context) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
                 db.execSQL("DELETE FROM Categories WHERE id = '" + idCategory + "'");
                 db.close();
             } catch (Exception ex) {
-                Log.d("Tag", ex.toString());
+                Toast.makeText(context, "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
             }
         }
     }

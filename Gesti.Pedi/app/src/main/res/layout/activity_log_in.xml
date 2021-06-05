@@ -85,10 +85,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvUsuario"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,UnusedAttribute" />
 
     <EditText
         android:id="@+id/etContraseña"
@@ -98,10 +99,11 @@
         android:ems="10"
         android:inputType="textPassword"
         android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvContraseña"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvContraseña"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,UnusedAttribute" />
 
     <Button
         android:id="@+id/btnIniciarSesion"

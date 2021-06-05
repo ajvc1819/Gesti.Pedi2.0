@@ -77,10 +77,11 @@
 
                 <TextView
                     android:id="@+id/tvDNI"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/dniClient"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDetalleCli" />
@@ -93,6 +94,7 @@
                     android:ems="10"
                     android:maxLength="9"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvStockProd"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvStockProd" />
@@ -106,7 +108,7 @@
 
                 <TextView
                     android:id="@+id/tvStockProd"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:layout_marginStart="20dp"
@@ -114,6 +116,7 @@
                     android:layout_marginTop="124dp"
                     android:text="@string/name"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDNI" />
 
@@ -124,6 +127,7 @@
                     android:layout_margin="20dp"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvEmpresa"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvEmpresa" />
@@ -137,11 +141,12 @@
 
                 <TextView
                     android:id="@+id/tvApellidos"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/lastNameE"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvStockProd" />
 
@@ -152,6 +157,7 @@
                     android:layout_margin="20dp"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvDirección"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvDirección" />
@@ -165,11 +171,12 @@
 
                 <TextView
                     android:id="@+id/tvEmpresa"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/enterprise"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvApellidos" />
 
@@ -180,6 +187,7 @@
                     android:layout_margin="20dp"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvCiudad"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvCiudad" />
@@ -193,11 +201,12 @@
 
                 <TextView
                     android:id="@+id/tvCP"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/cp"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvEmpresa" />
 
@@ -209,6 +218,7 @@
                     android:ems="10"
                     android:maxLength="5"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvCP"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvCP" />
@@ -222,10 +232,11 @@
 
                 <TextView
                     android:id="@+id/tvDirección"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/address"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCP" />
@@ -237,6 +248,7 @@
                     android:layout_margin="20dp"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvTelf"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvTelf" />
@@ -250,10 +262,11 @@
 
                 <TextView
                     android:id="@+id/tvCiudad"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/city"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDirección" />
@@ -264,6 +277,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
@@ -275,10 +289,11 @@
 
                 <TextView
                     android:id="@+id/tvPais"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/country"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTelf" />
@@ -289,6 +304,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
@@ -300,11 +316,12 @@
 
                 <TextView
                     android:id="@+id/tvTelf"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/phone"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCiudad" />
 
@@ -316,6 +333,7 @@
                     android:ems="10"
                     android:maxLength="9"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvPais"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvPais" />
@@ -328,7 +346,7 @@
 
                 <TextView
                     android:id="@+id/tvEmail"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/email"
@@ -342,6 +360,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvEmail"
                     app:layout_constraintEnd_toEndOf="parent"

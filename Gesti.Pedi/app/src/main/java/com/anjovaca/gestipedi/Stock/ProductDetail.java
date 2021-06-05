@@ -182,7 +182,7 @@ public class ProductDetail extends AppCompatActivity {
 
     //Función que permite eliminar productos de la base de datos.
     public void deleteProduct(View view) {
-        dbGestiPedi.deleteProduct(id);
+        dbGestiPedi.deleteProduct(id, getApplicationContext());
         finish();
     }
 

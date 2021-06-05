@@ -136,7 +136,7 @@ public class CategoryDetail extends AppCompatActivity {
 
     //Función que permite la eliminación de una categoria de la base de datos.
     public void deleteCategory(View view) {
-        dbGestiPedi.deleteCategory(id);
+        dbGestiPedi.deleteCategory(id, getApplicationContext());
         finish();
     }
 

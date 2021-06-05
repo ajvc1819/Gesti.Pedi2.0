@@ -19,6 +19,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="279dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/pedido" />
 
@@ -37,7 +38,7 @@
                     android:layout_marginTop="5dp"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -49,6 +50,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -60,7 +62,7 @@
                     android:inputType="textMultiLine"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText,TextViewEdits" />
 
                 <TextView
@@ -71,7 +73,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -83,6 +85,7 @@
                     android:gravity="end"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
             </LinearLayout>

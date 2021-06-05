@@ -182,7 +182,7 @@ public class ClientDetail extends AppCompatActivity {
     //Función que permite la obtención de los datos almacenados en SharedPreferences.
     private void getPreferences() {
         String sharedPrefFile = "com.example.android.sharedprefs";
-        SharedPreferences mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         String LOG_KEY = "log";
         login = mPreferences.getBoolean(LOG_KEY, login);
         String ROL_KEY = "rol";
@@ -193,7 +193,7 @@ public class ClientDetail extends AppCompatActivity {
 
     //Función que permite la eliminación de un cliente de la base de datos.
     public void deleteClient(View view) {
-        dbGestiPedi.deleteClient(id);
+        dbGestiPedi.deleteClient(id , getApplicationContext());
         finish();
     }
 

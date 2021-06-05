@@ -66,6 +66,7 @@
             android:backgroundTint="#FFFFFF"
             android:text="@string/name"
             android:textColor="#FFFFFF"
+            android:textSize="18sp"
             tools:targetApi="lollipop" />
 
         <EditText

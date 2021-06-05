@@ -157,7 +157,7 @@ public class Profile extends AppCompatActivity {
     //Función que permite la obtención de los datos almacenados en SharedPreferences.
     private void getPreferences() {
         String sharedPrefFile = "com.example.android.sharedprefs";
-        SharedPreferences mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         String USER_KEY = "user";
         idUser = mPreferences.getInt(USER_KEY, idUser);
         String LOG_KEY = "log";

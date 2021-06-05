@@ -77,7 +77,8 @@
 
                 <TextView
                     android:id="@+id/tvDNI"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/dniClient"
@@ -111,7 +112,8 @@
 
                 <TextView
                     android:id="@+id/tvStockProd"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:layout_marginStart="20dp"
@@ -148,7 +150,8 @@
 
                 <TextView
                     android:id="@+id/tvApellidos"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/lastNameE"
@@ -181,7 +184,8 @@
 
                 <TextView
                     android:id="@+id/tvEmpresa"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/enterprise"
@@ -214,7 +218,8 @@
 
                 <TextView
                     android:id="@+id/tvCP"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/cp"
@@ -248,7 +253,8 @@
 
                 <TextView
                     android:id="@+id/tvDirección"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/address"
@@ -281,7 +287,8 @@
 
                 <TextView
                     android:id="@+id/tvCiudad"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/city"
@@ -311,7 +318,8 @@
 
                 <TextView
                     android:id="@+id/tvPais"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/country"
@@ -341,7 +349,8 @@
 
                 <TextView
                     android:id="@+id/tvTelf"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/phone"
@@ -374,7 +383,8 @@
 
                 <TextView
                     android:id="@+id/tvEmail"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/email"

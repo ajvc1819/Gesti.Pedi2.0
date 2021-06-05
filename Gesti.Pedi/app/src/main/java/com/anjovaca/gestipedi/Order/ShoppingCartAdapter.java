@@ -135,7 +135,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         for (ProductsModel products : productsModelList) {
             if (products.getId() == orderDetailModelList.get(position).getIdProduct()) {
                 name = products.getName();
-                image = products.getImage();
+                image = products.getUrlImage();
                 stock = products.getStock();
             }
         }
@@ -146,7 +146,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.price.setText(orderDetailModelList.get(position).getPrice() + "€");
         FirebaseStorage storageReference = FirebaseStorage.getInstance();
         StorageReference storageRef = storageReference.getReference();
-        storageRef.child(productsModelList.get(position).getUrlImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context).load(uri.toString()).into(holder.imageProd);

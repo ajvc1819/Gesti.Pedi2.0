@@ -93,7 +93,8 @@
 
                 <TextView
                     android:id="@+id/tvNomProdD"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:layout_marginStart="20dp"
@@ -111,6 +112,7 @@
                     android:layout_margin="20dp"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvStockProdD"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvStockProdD" />
@@ -124,7 +126,8 @@
 
                 <TextView
                     android:id="@+id/tvDescripcionProdD"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/descriptionTitle"
@@ -139,6 +142,7 @@
                     android:layout_margin="20dp"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvStockProdD"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvStockProdD" />
@@ -152,7 +156,8 @@
 
                 <TextView
                     android:id="@+id/tvStockProdD"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/stock"
@@ -166,6 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvCiudad"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +186,8 @@
 
                 <TextView
                     android:id="@+id/tvPrecioProdD"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/price"
@@ -194,6 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvPrecioProdD"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +216,8 @@
 
                 <TextView
                     android:id="@+id/tvCategoriaProdD"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
+                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/category"
@@ -222,6 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvTelf"
                     app:layout_constraintEnd_toEndOf="parent"
