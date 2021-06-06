@@ -116,14 +116,11 @@ public class CategoryActivity extends AppCompatActivity {
 
         categoryModelList = dbGestiPedi.getCategories();
 
-        categoryAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int categoryId = categoryAdapter.categoryModelList.get(recyclerView.getChildAdapterPosition(v)).getId();
-                Intent intent = new Intent(getApplicationContext(), CategoryDetail.class);
-                intent.putExtra(EXTRA_ID, categoryId);
-                startActivity(intent);
-            }
+        categoryAdapter.setOnClickListener(v -> {
+            int categoryId = categoryAdapter.categoryModelList.get(recyclerView.getChildAdapterPosition(v)).getId();
+            Intent intent = new Intent(getApplicationContext(), CategoryDetail.class);
+            intent.putExtra(EXTRA_ID, categoryId);
+            startActivity(intent);
         });
 
         recyclerView.setAdapter(categoryAdapter);

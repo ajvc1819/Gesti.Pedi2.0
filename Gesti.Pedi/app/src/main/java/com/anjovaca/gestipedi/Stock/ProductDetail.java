@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.DbGestiPedi;
 import com.anjovaca.gestipedi.DB.Models.CategoryModel;
@@ -29,11 +25,8 @@ import com.anjovaca.gestipedi.Main.MainActivity;
 import com.anjovaca.gestipedi.Order.ShoppingCart;
 import com.anjovaca.gestipedi.R;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.ByteArrayInputStream;
 import java.util.List;
 
 public class ProductDetail extends AppCompatActivity {
@@ -213,12 +206,7 @@ public class ProductDetail extends AppCompatActivity {
                 category.setText(cursor.getString(4));
                 FirebaseStorage storageReference = FirebaseStorage.getInstance();
                 StorageReference storageRef = storageReference.getReference();
-                storageRef.child(cursor.getString(5)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Glide.with(getApplicationContext()).load(uri.toString()).into(imageProduct);
-                    }
-                });
+                storageRef.child(cursor.getString(5)).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(getApplicationContext()).load(uri.toString()).into(imageProduct));
             } while ((cursor.moveToNext()));
         }
 

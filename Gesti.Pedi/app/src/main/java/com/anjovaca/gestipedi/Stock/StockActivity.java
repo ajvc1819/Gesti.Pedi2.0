@@ -17,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.DbGestiPedi;
 import com.anjovaca.gestipedi.DB.Models.CategoryModel;
@@ -26,12 +25,8 @@ import com.anjovaca.gestipedi.LogIn.LogIn;
 import com.anjovaca.gestipedi.LogIn.Profile;
 import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
 import com.anjovaca.gestipedi.Main.MainActivity;
-import com.anjovaca.gestipedi.Order.OrderActivity;
-import com.anjovaca.gestipedi.Order.OrderAdapter;
-import com.anjovaca.gestipedi.Order.OrderDetail;
 import com.anjovaca.gestipedi.Order.ShoppingCart;
 import com.anjovaca.gestipedi.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,14 +87,11 @@ public class StockActivity extends AppCompatActivity implements
         productsModelList = dbGestiPedi.showProducts();
         productAdapter = new ProductAdapter(dbGestiPedi.showProducts(), getApplicationContext());
 
-        productAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int productId = productAdapter.productsModelList.get(recyclerViewProduct.getChildAdapterPosition(v)).getId();
-                Intent intent = new Intent(getApplicationContext(), ProductDetail.class);
-                intent.putExtra(EXTRA_PRODUCT_ID, productId);
-                startActivity(intent);
-            }
+        productAdapter.setOnClickListener(v -> {
+            int productId = productAdapter.productsModelList.get(recyclerViewProduct.getChildAdapterPosition(v)).getId();
+            Intent intent = new Intent(getApplicationContext(), ProductDetail.class);
+            intent.putExtra(EXTRA_PRODUCT_ID, productId);
+            startActivity(intent);
         });
 
         recyclerViewProduct.setAdapter(productAdapter);

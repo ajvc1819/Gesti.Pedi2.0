@@ -2,7 +2,6 @@ package com.anjovaca.gestipedi.Stock;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.R;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -24,7 +22,7 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements View.OnClickListener {
     public List<ProductsModel> productsModelList;
     private View.OnClickListener listener;
-    private Context context;
+    private final Context context;
 
     //Constructor que nos permite asignar la lista.
     public ProductAdapter(List<ProductsModel> productList, Context context) {
@@ -74,12 +72,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.stock.setText("Stock: " + productsModelList.get(position).getStock());
         FirebaseStorage storageReference = FirebaseStorage.getInstance();
         StorageReference storageRef = storageReference.getReference();
-        storageRef.child(productsModelList.get(position).getUrlImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri.toString()).into(holder.image);
-            }
-        });
+        storageRef.child(productsModelList.get(position).getUrlImage()).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context).load(uri.toString()).into(holder.image));
 
     }
 

@@ -111,37 +111,34 @@ public class AddProductToShoppingCart extends AppCompatActivity {
 
         productAdapter = new ProductAdapter(dbGestiPedi.showProducts(), getApplicationContext());
 
-        productAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int productId = productAdapter.productsModelList.get(recyclerViewProduct.getChildAdapterPosition(v)).getId();
-                List<ProductsModel> productsModelList = dbGestiPedi.selectProductById(productId);
-                List<OrderDetailModel> orderDetailModelList = dbGestiPedi.checkOrderDetail(productId, orderId);
-                double priceProduct = productsModelList.get(0).getPrice();
-                int stock = productsModelList.get(0).getStock();
+        productAdapter.setOnClickListener(v -> {
+            int productId = productAdapter.productsModelList.get(recyclerViewProduct.getChildAdapterPosition(v)).getId();
+            List<ProductsModel> productsModelList = dbGestiPedi.selectProductById(productId);
+            List<OrderDetailModel> orderDetailModelList = dbGestiPedi.checkOrderDetail(productId, orderId);
+            double priceProduct = productsModelList.get(0).getPrice();
+            int stock = productsModelList.get(0).getStock();
 
-                if (!orderDetailModelList.isEmpty()) {
-                    int id = orderDetailModelList.get(0).getId();
-                    int quantity = orderDetailModelList.get(0).getQuantity();
-                    double priceDetail = orderDetailModelList.get(0).getPrice();
-                    dbGestiPedi.increaseQuantity(id, stock, quantity, priceDetail, priceProduct, orderId);
+            if (!orderDetailModelList.isEmpty()) {
+                int id = orderDetailModelList.get(0).getId();
+                int quantity = orderDetailModelList.get(0).getQuantity();
+                double priceDetail = orderDetailModelList.get(0).getPrice();
+                dbGestiPedi.increaseQuantity(id, stock, quantity, priceDetail, priceProduct, orderId);
+                double totalPrice = updateTotalPriceOrder();
+                dbGestiPedi.updateTotalPrice(orderId, totalPrice);
+                finish();
+
+            } else {
+                if (stock > 0) {
+                    dbGestiPedi.insertOrderDetail(priceProduct, orderId, productId);
                     double totalPrice = updateTotalPriceOrder();
                     dbGestiPedi.updateTotalPrice(orderId, totalPrice);
                     finish();
-
                 } else {
-                    if (stock > 0) {
-                        dbGestiPedi.insertOrderDetail(priceProduct, orderId, productId);
-                        double totalPrice = updateTotalPriceOrder();
-                        dbGestiPedi.updateTotalPrice(orderId, totalPrice);
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "No se puede añadir el producto al carrito por que no hay existencias en el almacen.", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getApplicationContext(), "No se puede añadir el producto al carrito por que no hay existencias en el almacen.", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
+
+
         });
 
         recyclerViewProduct.setAdapter(productAdapter);

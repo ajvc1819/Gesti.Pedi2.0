@@ -123,22 +123,19 @@ public class SelectClientForOrder extends AppCompatActivity {
 
         clientModelList = dbGestiPedi.showClients();
 
-        clientAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int clientId = clientAdapter.clientModelList.get(recyclerViewClient.getChildAdapterPosition(v)).getId();
-                dbGestiPedi.insertOrder(clientId, idUser);
-                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                List<OrderModel> orderDetailModelList = dbGestiPedi.selectLastOrder();
-                int id = orderDetailModelList.get(0).getId();
+        clientAdapter.setOnClickListener(v -> {
+            int clientId = clientAdapter.clientModelList.get(recyclerViewClient.getChildAdapterPosition(v)).getId();
+            dbGestiPedi.insertOrder(clientId, idUser);
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            List<OrderModel> orderDetailModelList = dbGestiPedi.selectLastOrder();
+            int id = orderDetailModelList.get(0).getId();
 
-                String ORDER_ID_KEY = "id";
-                preferencesEditor.putInt(ORDER_ID_KEY, id);
-                preferencesEditor.apply();
+            String ORDER_ID_KEY = "id";
+            preferencesEditor.putInt(ORDER_ID_KEY, id);
+            preferencesEditor.apply();
 
-                Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
+            startActivity(intent);
         });
 
         recyclerViewClient.setAdapter(clientAdapter);

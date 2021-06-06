@@ -21,7 +21,8 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/pedido" />
+                app:srcCompat="@drawable/pedido"
+                android:contentDescription="@string/icono_pedido" />
 
             <LinearLayout
                 android:layout_width="match_parent"

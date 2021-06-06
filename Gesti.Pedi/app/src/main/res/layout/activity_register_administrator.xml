@@ -323,10 +323,11 @@
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:textColor="#FFFFFF"
+                    android:inputType="text"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvEmail"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvEmail"
-                    tools:ignore="LabelFor"
+                    tools:ignore="LabelFor,TextFields"
                     tools:targetApi="lollipop" />
             </LinearLayout>
 
@@ -354,7 +355,6 @@
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:inputType="textPassword"
-                    android:password="true"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvEmail"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -18,10 +18,9 @@ import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.DB.Models.UserModel;
 import com.anjovaca.gestipedi.DB.Models.OrderDetailModel;
 import com.anjovaca.gestipedi.DB.Models.OrderModel;
-import com.google.android.gms.common.internal.Objects;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -151,7 +150,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     }
 
     //Función que permite la eliminación de un cliente de la base de datos por su id.
-    public void deleteClient(int idClient , Context context) {
+    public void deleteClient(int idClient, Context context) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
@@ -252,8 +251,6 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite crear nuevos productos en la base de datos.
     public void insertProduct(String name, String description, int stock, double price, String image, int category, String urlImage) {
         SQLiteDatabase db = getWritableDatabase();
-        int sold = 0;
-
         if (db != null) {
             try {
                 db.execSQL("INSERT INTO Products (nombre,idCategoria,descripcion,stock,precio,foto,urlImagen ) VALUES ('" + name + "', '" + category + "','" + description + "','" + stock + "','" + price + "','" + image + "','" + urlImage + "')");
@@ -367,8 +364,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         double total = 0;
         String state = "En Proceso";
-        Date currentTime = Calendar.getInstance().getTime();
-        String date = currentTime.toString();
+        Date currentTime = new Date();
+        String date = DateFormat.getDateTimeInstance().format(currentTime);
 
         if (db != null) {
             try {
@@ -384,10 +381,12 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public void confirmOrder(int id) {
         SQLiteDatabase db = getWritableDatabase();
         String state = "Confirmado";
+        Date currentTime = new Date();
+        String date = DateFormat.getDateTimeInstance().format(currentTime);
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Orders SET estado = '" + state + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Orders SET estado = '" + state + "', fecha = '" + date + "' WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());

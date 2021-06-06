@@ -31,7 +31,6 @@ import com.anjovaca.gestipedi.Main.MainActivity;
 import com.anjovaca.gestipedi.Order.ShoppingCart;
 import com.anjovaca.gestipedi.R;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -85,12 +84,7 @@ public class EditProduct extends AppCompatActivity implements
         price.setText(Double.toString(productsModelList.get(0).getPrice()));
         FirebaseStorage storageReference = FirebaseStorage.getInstance();
         StorageReference storageRef = storageReference.getReference();
-        storageRef.child(productsModelList.get(0).getUrlImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext()).load(uri.toString()).into(image);
-            }
-        });
+        storageRef.child(productsModelList.get(0).getUrlImage()).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(getApplicationContext()).load(uri.toString()).into(image));
     }
 
     //Función que permite la edición de los datos de un producto en la base de datos.

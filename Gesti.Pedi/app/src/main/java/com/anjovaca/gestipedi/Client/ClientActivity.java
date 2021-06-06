@@ -141,14 +141,11 @@ public class ClientActivity extends AppCompatActivity {
 
         clientAdapter = new ClientAdapter(ClientActivity.this, dbGestiPedi.showClients());
 
-        clientAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int clientId = clientAdapter.clientModelList.get(recyclerViewClient.getChildAdapterPosition(v)).getId();
-                Intent intent = new Intent(getApplicationContext(), ClientDetail.class);
-                intent.putExtra(EXTRA_ID, clientId);
-                startActivity(intent);
-            }
+        clientAdapter.setOnClickListener(v -> {
+            int clientId = clientAdapter.clientModelList.get(recyclerViewClient.getChildAdapterPosition(v)).getId();
+            Intent intent = new Intent(getApplicationContext(), ClientDetail.class);
+            intent.putExtra(EXTRA_ID, clientId);
+            startActivity(intent);
         });
 
         recyclerViewClient.setAdapter(clientAdapter);

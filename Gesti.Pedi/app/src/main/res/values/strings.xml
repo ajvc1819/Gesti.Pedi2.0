@@ -76,6 +76,8 @@
     <string name="registrerAdmin">Registrar Administrador</string>
     <string name="profile">Perfil</string>
     <string name="categories">Categorias</string>
+    <string name="Quantity">Cantidad:</string>
+    <string name="icono_pedido">Icono Pedido</string>
 
 
     <string-array name="states_array">

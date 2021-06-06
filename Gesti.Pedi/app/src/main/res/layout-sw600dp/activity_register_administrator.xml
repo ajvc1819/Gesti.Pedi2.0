@@ -334,8 +334,9 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvEmail"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvEmail"
-                    tools:ignore="LabelFor"
-                    tools:targetApi="lollipop" />
+                    android:inputType="text"
+                    tools:targetApi="lollipop"
+                    tools:ignore="LabelFor" />
             </LinearLayout>
 
             <LinearLayout
@@ -363,7 +364,6 @@
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:inputType="textPassword"
-                    android:password="true"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvEmail"
                     app:layout_constraintEnd_toEndOf="parent"

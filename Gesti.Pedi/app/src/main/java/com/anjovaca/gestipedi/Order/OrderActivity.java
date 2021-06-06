@@ -133,14 +133,11 @@ public class OrderActivity extends AppCompatActivity implements
         orderAdapter = new OrderAdapter(OrderActivity.this, orderModelList, clientModelList);
 
 
-        orderAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int orderId = orderAdapter.orderModelList.get(recyclerViewOrder.getChildAdapterPosition(v)).getId();
-                Intent intent = new Intent(getApplicationContext(), OrderDetail.class);
-                intent.putExtra(EXTRA_ID, orderId);
-                startActivity(intent);
-            }
+        orderAdapter.setOnClickListener(v -> {
+            int orderId = orderAdapter.orderModelList.get(recyclerViewOrder.getChildAdapterPosition(v)).getId();
+            Intent intent = new Intent(getApplicationContext(), OrderDetail.class);
+            intent.putExtra(EXTRA_ID, orderId);
+            startActivity(intent);
         });
 
         recyclerViewOrder.setAdapter(orderAdapter);
