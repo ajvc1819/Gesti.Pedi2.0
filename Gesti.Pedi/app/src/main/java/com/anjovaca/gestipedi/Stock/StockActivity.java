@@ -68,8 +68,8 @@ public class StockActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         categoryModelList = dbGestiPedi.getCategories();
         obtenerLista();

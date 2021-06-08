@@ -50,8 +50,10 @@ public class ClientActivity extends AppCompatActivity {
 
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
 
-        setEditTextEvent();
+        clientModelList = dbGestiPedi.showClients();
+
         setRecyclerView();
+        setEditTextEvent();
         getPreferences();
 
         if (!rol.equals("Administrador")) {
@@ -60,11 +62,12 @@ public class ClientActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
-        setEditTextEvent();
+        clientModelList = dbGestiPedi.showClients();
         setRecyclerView();
+        setEditTextEvent();
         getPreferences();
     }
 

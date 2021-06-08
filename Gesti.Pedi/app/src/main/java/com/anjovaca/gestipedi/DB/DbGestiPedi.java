@@ -82,7 +82,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los datos de un cliente por su id en la base de datos.
     public List<ClientModel> getClientsById(int idClient) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Clients WHERE id = '" + idClient + "' ", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Clients WHERE id = '" + idClient + "' ", null);
         List<ClientModel> clients = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -96,7 +97,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener todos los datos de todos los clientes de la base de datos.
     public List<ClientModel> showClients() {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Clients", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Clients", null);
         List<ClientModel> clients = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -110,7 +112,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite comprobar que no se pueda añadir un cliente con algunos de sus campos únicos como duplicados.
     public List<ClientModel> checkClient(String dni, String phone, String email) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Clients WHERE Dni = '" + dni + "' OR telefono = '" + phone + "' OR correo = '" + email + "'", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Clients " +
+                                                                  "WHERE Dni = '" + dni + "' OR telefono = '" + phone + "' OR correo = '" + email + "'", null);
         List<ClientModel> clients = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -127,7 +131,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("INSERT INTO Clients (dni,nombre,apellidos,empresa,direccion,cp,ciudad,pais,telefono,correo) VALUES ('" + dni + "', '" + name + "','" + lastname + "','" + enterprise + "','" + address + "','" + cp + "','" + city + "','" + country + "','" + phone + "','" + email + "')");
+                db.execSQL("INSERT INTO Clients (dni,nombre,apellidos,empresa,direccion,cp,ciudad,pais,telefono,correo) " +
+                        "VALUES ('" + dni + "', '" + name + "','" + lastname + "','" + enterprise + "','" + address + "','" + cp + "','" + city + "','" + country + "','" + phone + "','" + email + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -141,7 +146,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Clients SET dni = '" + dni + "', nombre = '" + name + "', apellidos = '" + lastname + "', empresa = '" + enterprise + "', direccion = '" + address + "', cp = '" + cp + "', ciudad = '" + city + "', pais = '" + country + "', telefono = '" + phone + "', correo = '" + email + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Clients " +
+                        "SET dni = '" + dni + "', nombre = '" + name + "', apellidos = '" + lastname + "', empresa = '" + enterprise + "', direccion = '" + address + "', cp = '" + cp + "', ciudad = '" + city + "', pais = '" + country + "', telefono = '" + phone + "', correo = '" + email + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -150,15 +157,13 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     }
 
     //Función que permite la eliminación de un cliente de la base de datos por su id.
-    public void deleteClient(int idClient, Context context) {
+    public void deleteClient(int idClient) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
-            try {
-                db.execSQL("DELETE FROM Users WHERE id = '" + idClient + "'");
-                db.close();
-            } catch (Exception ex) {
-                Toast.makeText(context, "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
-            }
+
+            db.execSQL("DELETE FROM Clients WHERE id = '" + idClient + "'");
+            db.close();
+
         }
     }
 
@@ -166,7 +171,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener todos los datos de todos los usuarios de la base de datos.
     public List<UserModel> getUsers() {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Users", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Users", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -183,7 +189,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("INSERT INTO Users (dni,nombre,apellidos, usuario,contraseña,rol,telefono, email, ciudad, pais) VALUES ('" + dni + "','" + name + "','" + lastname + "','" + username + "','" + password + "','" + rol + "','" + phone + "','" + email + "','" + city + "','" + country + "')");
+                db.execSQL("INSERT INTO Users (dni,nombre,apellidos, usuario,contraseña,rol,telefono, email, ciudad, pais) " +
+                        "VALUES ('" + dni + "','" + name + "','" + lastname + "','" + username + "','" + password + "','" + rol + "','" + phone + "','" + email + "','" + city + "','" + country + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -197,7 +204,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Users SET nombre = '" + name + "', apellidos ='" + lastname + "', dni ='" + dni + "', ciudad ='" + city + "', pais = '" + country + "', telefono = '" + phone + "',email = '" + email + "'WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Users " +
+                        "SET nombre = '" + name + "', apellidos ='" + lastname + "', dni ='" + dni + "', ciudad ='" + city + "', pais = '" + country + "', telefono = '" + phone + "',email = '" + email + "'WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -208,7 +216,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los datos de un usuario por su id en la base de datos.
     public List<UserModel> getUsersById(int idUser) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE id = '" + idUser + "' ", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Users WHERE id = '" + idUser + "' ", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -222,7 +231,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite realizar las comprobaciones necesarias para el inicio de sesión de un usario en la aplicación.
     public List<UserModel> initSession(String username, String password) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE usuario = '" + username + "' AND contraseña = '" + password + "'", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Users " +
+                                                                  "WHERE usuario = '" + username + "' AND contraseña = '" + password + "'", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -236,7 +247,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite la comprobación de datos de los usuario par evitar la duplicidad.
     public List<UserModel> checkUsers(String username) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE usuario = '" + username + "'", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Users WHERE usuario = '" + username + "'", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -253,7 +265,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
-                db.execSQL("INSERT INTO Products (nombre,idCategoria,descripcion,stock,precio,foto,urlImagen ) VALUES ('" + name + "', '" + category + "','" + description + "','" + stock + "','" + price + "','" + image + "','" + urlImage + "')");
+                db.execSQL("INSERT INTO Products (nombre,idCategoria,descripcion,stock,precio,foto,urlImagen ) " +
+                        "VALUES ('" + name + "', '" + category + "','" + description + "','" + stock + "','" + price + "','" + image + "','" + urlImage + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -264,7 +277,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite mostrar los datos de todos los productos de la base de datos.
     public List<ProductsModel> showProducts() {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Products", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                   "FROM Products", null);
         List<ProductsModel> products = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -278,7 +292,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite la obtención de los datos de un producto por su id.
     public List<ProductsModel> selectProductById(int idProduct) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Products WHERE id = '" + idProduct + "' ", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Products " +
+                                                                  "WHERE id = '" + idProduct + "' ", null);
         List<ProductsModel> products = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -295,7 +311,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Products SET nombre = '" + name + "', descripcion = '" + description + "', stock = '" + stock + "', precio = '" + price + "', foto = '" + image + "', idCategoria = '" + category + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Products " +
+                            "SET nombre = '" + name + "', descripcion = '" + description + "', stock = '" + stock + "', precio = '" + price + "', foto = '" + image + "', idCategoria = '" + category + "' " +
+                            "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -308,7 +326,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
-                db.execSQL("DELETE FROM Products WHERE id = '" + idProduct + "'");
+                db.execSQL("DELETE FROM Products " +
+                           "WHERE id = '" + idProduct + "'");
                 db.close();
             } catch (Exception ex) {
                 Toast.makeText(context, "No se puede eliminar el producto seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
@@ -320,7 +339,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los datos de todos los pedidos de la base de datos.
     public List<OrderModel> showOrders() {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Orders", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Orders", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -334,7 +354,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los datos de todos los pedidos de la base de datos filtrados por usuarios.
     public List<OrderModel> showOrdersByUser(int idUser) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Orders WHERE idUsuario = '" + idUser + "'", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Orders " +
+                                                                  "WHERE idUsuario = '" + idUser + "'", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -348,7 +370,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los datos de un pedido por su id.
     public List<OrderModel> getOrderById(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Orders WHERE id = '" + id + "'", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Orders " +
+                                                                  "WHERE id = '" + id + "'", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -369,7 +393,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("INSERT INTO Orders (fecha,idCliente,estado,total,idUsuario) VALUES ('" + date + "', '" + idClient + "','" + state + "','" + total + "','" + idUser + "')");
+                db.execSQL("INSERT INTO Orders (fecha,idCliente,estado,total,idUsuario) " +
+                           "VALUES ('" + date + "', '" + idClient + "','" + state + "','" + total + "','" + idUser + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -386,7 +411,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Orders SET estado = '" + state + "', fecha = '" + date + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Orders " +
+                            "SET estado = '" + state + "', fecha = '" + date + "' WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -401,7 +427,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Orders SET estado = '" + state + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Orders " +
+                           "SET estado = '" + state + "' " +
+                           "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -416,7 +444,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Orders SET estado = '" + state + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Orders " +
+                           "SET estado = '" + state + "' " +
+                           "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -430,7 +460,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("DELETE FROM Orders WHERE id = '" + id + "'");
+                db.execSQL("DELETE FROM Orders " +
+                           "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -444,7 +475,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("UPDATE Orders SET total = '" + totalPrice + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Orders " +
+                           "SET total = '" + totalPrice + "' " +
+                           "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -456,7 +489,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los detalles de pedido de un pedido concreto.
     public List<OrderDetailModel> showOrderDetail(int idOrder) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM OrderDetails WHERE idPedido = '" + idOrder + "' ", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM OrderDetails " +
+                                                                  "WHERE idPedido = '" + idOrder + "' ", null);
         List<OrderDetailModel> details = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -470,7 +505,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener un detalle de pedido por su id.
     public List<OrderDetailModel> getOrderDetailById(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM OrderDetails WHERE id = '" + id + "' ", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM OrderDetails " +
+                                                                  "WHERE id = '" + id + "' ", null);
         List<OrderDetailModel> details = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -488,7 +525,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("INSERT INTO OrderDetails (cantidad, precio, idPedido, idProducto) VALUES ('" + quantity + "', '" + price + "','" + idOrder + "','" + idProduct + "')");
+                db.execSQL("INSERT INTO OrderDetails (cantidad, precio, idPedido, idProducto) " +
+                        "VALUES ('" + quantity + "', '" + price + "','" + idOrder + "','" + idProduct + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -504,7 +542,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
 
         if (db != null) {
             try {
-                db.execSQL("DELETE FROM OrderDetails WHERE id = '" + id + "'");
+                db.execSQL("DELETE FROM OrderDetails " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -518,7 +557,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
-                db.execSQL("DELETE FROM OrderDetails WHERE id = '" + id + "'");
+                db.execSQL("DELETE FROM OrderDetails " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -529,7 +569,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite obtener los datos del ultimo pedido.
     public List<OrderModel> selectLastOrder() {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Orders ORDER by id DESC LIMIT 1", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Orders " +
+                                                                  "ORDER BY id DESC LIMIT 1", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -543,7 +585,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite comprobar si el producto ya existe dentro del carrito de la compra.
     public List<OrderDetailModel> checkOrderDetail(int idProduct, int idOrder) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM OrderDetails WHERE idPedido = '" + idOrder + "' AND idProducto = '" + idProduct + "'", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM OrderDetails " +
+                                                                  "WHERE idPedido = '" + idOrder + "' AND idProducto = '" + idProduct + "'", null);
         List<OrderDetailModel> details = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -562,7 +606,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
             priceDetail = priceDetail + priceProduct;
             if (db != null) {
                 try {
-                    db.execSQL("UPDATE OrderDetails SET cantidad = '" + quantity + "', precio = '" + priceDetail + "' WHERE id = '" + id + "'");
+                    db.execSQL("UPDATE OrderDetails " +
+                            "SET cantidad = '" + quantity + "', precio = '" + priceDetail + "' " +
+                            "WHERE id = '" + id + "'");
                     db.close();
                 } catch (Exception ex) {
                     Log.d("Tag", ex.toString());
@@ -580,7 +626,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
             priceDetail = priceDetail - priceProduct;
             if (db != null) {
                 try {
-                    db.execSQL("UPDATE OrderDetails SET cantidad = '" + quantity + "', precio = '" + priceDetail + "' WHERE id = '" + id + "'");
+                    db.execSQL("UPDATE OrderDetails " +
+                            "SET cantidad = '" + quantity + "', precio = '" + priceDetail + "' " +
+                            "WHERE id = '" + id + "'");
                     db.close();
                 } catch (Exception ex) {
                     Log.d("Tag", ex.toString());
@@ -596,7 +644,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         stock = stock - quantity;
         if (db != null) {
             try {
-                db.execSQL("UPDATE Products SET stock = '" + stock + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Products " +
+                        "SET stock = '" + stock + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -610,7 +660,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         stock = stock + quantity;
         if (db != null) {
             try {
-                db.execSQL("UPDATE Products SET stock = '" + stock + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Products " +
+                        "SET stock = '" + stock + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -622,7 +674,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite la obtención de una categoria por su id.
     public List<CategoryModel> selectCategoryById(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Categories WHERE id = '" + id + "' ", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                 "FROM Categories " +
+                                                                 "WHERE id = '" + id + "' ", null);
         List<CategoryModel> categories = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -638,7 +692,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
-                db.execSQL("INSERT INTO Categories (nombre) VALUES ('" + name + "')");
+                db.execSQL("INSERT INTO Categories (nombre) " +
+                        "VALUES ('" + name + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -649,7 +704,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     //Función que permite la obtención de todas las categorias registradas en la base de datos.
     public List<CategoryModel> getCategories() {
         SQLiteDatabase db = getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM Categories", null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                                                                  "FROM Categories", null);
         List<CategoryModel> categories = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -665,7 +721,9 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
-                db.execSQL("UPDATE Categories SET nombre = '" + name + "' WHERE id = '" + id + "'");
+                db.execSQL("UPDATE Categories " +
+                        "SET nombre = '" + name + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -678,7 +736,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             try {
-                db.execSQL("DELETE FROM Categories WHERE id = '" + idCategory + "'");
+                db.execSQL("DELETE FROM Categories " +
+                        "WHERE id = '" + idCategory + "'");
                 db.close();
             } catch (Exception ex) {
                 Toast.makeText(context, "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();

@@ -90,7 +90,7 @@
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="@string/search_name"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/spnSearchCategory"

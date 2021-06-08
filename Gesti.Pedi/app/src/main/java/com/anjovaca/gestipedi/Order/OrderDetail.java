@@ -96,8 +96,8 @@ public class OrderDetail extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         orderModelList = dbGestiPedi.getOrderById(id);
         orderDetailModelList = dbGestiPedi.showOrderDetail(id);

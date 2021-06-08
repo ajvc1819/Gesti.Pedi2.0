@@ -51,8 +51,8 @@ public class ShoppingCart extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         orderDetailModelList = dbGestiPedi.showOrderDetail(orderId);
         getPreferences();
@@ -64,8 +64,22 @@ public class ShoppingCart extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == android.R.id.home){
-            finish();
+        if (id == android.R.id.home) {
+
+            List<OrderDetailModel> orderDetailModelList = dbGestiPedi.showOrderDetail(orderId);
+
+            if(orderDetailModelList.isEmpty()){
+                dbGestiPedi.deleteOrder(orderId);
+
+                orderId = 0;
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                String ORDER_ID_KEY = "id";
+                preferencesEditor.putInt(ORDER_ID_KEY, orderId);
+                preferencesEditor.apply();
+            }
+
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
             return true;
         }
 
@@ -196,6 +210,18 @@ public class ShoppingCart extends AppCompatActivity {
 
     //Función que permite regresar al menú principal al pulsar sobre el logotipo de la empresa.
     public void returnMainMenu(View view) {
+        List<OrderDetailModel> orderDetailModelList = dbGestiPedi.showOrderDetail(orderId);
+
+        if(orderDetailModelList.isEmpty()){
+            dbGestiPedi.deleteOrder(orderId);
+
+            orderId = 0;
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            String ORDER_ID_KEY = "id";
+            preferencesEditor.putInt(ORDER_ID_KEY, orderId);
+            preferencesEditor.apply();
+        }
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }

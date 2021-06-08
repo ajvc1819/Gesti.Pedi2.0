@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.Models.ClientModel;
@@ -86,8 +87,8 @@ public class ClientDetail extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         Intent intent = getIntent();
         id = intent.getIntExtra(ClientActivity.EXTRA_ID, 0);
 
@@ -193,8 +194,13 @@ public class ClientDetail extends AppCompatActivity {
 
     //Función que permite la eliminación de un cliente de la base de datos.
     public void deleteClient(View view) {
-        dbGestiPedi.deleteClient(id , getApplicationContext());
-        finish();
+        try{
+            dbGestiPedi.deleteClient(id);
+            finish();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     //Función que nos permite hacer la llamada a la actividad EditClient.

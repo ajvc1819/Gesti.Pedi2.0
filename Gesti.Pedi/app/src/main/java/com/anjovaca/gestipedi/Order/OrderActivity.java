@@ -54,8 +54,8 @@ public class OrderActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         getPreferences();
         setSpinner();

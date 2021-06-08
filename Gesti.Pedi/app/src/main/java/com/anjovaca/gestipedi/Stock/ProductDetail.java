@@ -79,8 +79,8 @@ public class ProductDetail extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
 
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         Intent intent = getIntent();

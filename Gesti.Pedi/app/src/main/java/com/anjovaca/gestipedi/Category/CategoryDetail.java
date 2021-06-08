@@ -53,8 +53,8 @@ public class CategoryDetail extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onRestart() {
+        super.onRestart();
         Intent intent = getIntent();
         id = intent.getIntExtra(ClientActivity.EXTRA_ID, 0);
 

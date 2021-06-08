@@ -180,8 +180,7 @@ public class AddProduct extends AppCompatActivity implements
                 dataPath.putFile(imageUri);
                 String urlImage = dataPath.getPath();
                 dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
-                Intent intent = new Intent(getApplicationContext(), StockActivity.class);
-                startActivity(intent);
+                finish();
             }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
