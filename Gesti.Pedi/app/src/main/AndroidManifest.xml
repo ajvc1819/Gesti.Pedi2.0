@@ -17,7 +17,8 @@
         tools:ignore="AllowBackup">
         <activity android:name=".LogIn.EditProfile"
             android:label="Editar Perfil"
-            android:parentActivityName=".LogIn.Profile">
+            android:parentActivityName=".LogIn.Profile"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.LogIn.Profile" />
@@ -25,7 +26,8 @@
         <activity
             android:name=".Order.SelectClientForOrder"
             android:label="Seleccionar Cliente"
-            android:parentActivityName=".Order.OrderActivity">
+            android:parentActivityName=".Order.OrderActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Order.OrderActivity" />
@@ -33,7 +35,8 @@
         <activity
             android:name=".LogIn.RegisterAdministrator"
             android:label="Registrar Administrador"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -41,7 +44,8 @@
         <activity
             android:name=".Category.EditCategory"
             android:label="Editar Categoría"
-            android:parentActivityName=".Category.CategoryDetail">
+            android:parentActivityName=".Category.CategoryDetail"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Category.CategoryDetail" />
@@ -49,7 +53,8 @@
         <activity
             android:name=".Category.CategoryDetail"
             android:label="Detalle Categoría"
-            android:parentActivityName=".Category.CategoryActivity">
+            android:parentActivityName=".Category.CategoryActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Category.CategoryActivity" />
@@ -57,7 +62,8 @@
         <activity
             android:name=".Category.AddCategory"
             android:label="Añadir Categoría"
-            android:parentActivityName=".Category.CategoryActivity">
+            android:parentActivityName=".Category.CategoryActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Category.CategoryActivity" />
@@ -65,7 +71,8 @@
         <activity
             android:name=".Category.CategoryActivity"
             android:label="Categorias"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -73,7 +80,8 @@
         <activity
             android:name=".Order.AddProductToShoppingCart"
             android:label="Añadir Producto al Carrito"
-            android:parentActivityName=".Order.ShoppingCart">
+            android:parentActivityName=".Order.ShoppingCart"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Order.ShoppingCart" />
@@ -81,7 +89,8 @@
         <activity
             android:name=".Order.ShoppingCart"
             android:label="Carrito"
-            android:parentActivityName=".Client.ClientDetail">
+            android:parentActivityName=".Client.ClientDetail"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Client.ClientDetail" />
@@ -89,7 +98,8 @@
         <activity
             android:name=".Order.OrderDetail"
             android:label="Detalle Pedido"
-            android:parentActivityName=".Order.OrderActivity">
+            android:parentActivityName=".Order.OrderActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Order.OrderActivity" />
@@ -97,7 +107,8 @@
         <activity
             android:name=".Stock.EditProduct"
             android:label="Editar Producto"
-            android:parentActivityName=".Stock.ProductDetail">
+            android:parentActivityName=".Stock.ProductDetail"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Stock.ProductDetail" />
@@ -105,7 +116,8 @@
         <activity
             android:name=".Stock.ProductDetail"
             android:label="Detalles Producto"
-            android:parentActivityName=".Stock.StockActivity">
+            android:parentActivityName=".Stock.StockActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Stock.StockActivity" />
@@ -113,7 +125,8 @@
         <activity
             android:name=".Stock.AddProduct"
             android:label="Añadir Producto"
-            android:parentActivityName=".Stock.StockActivity">
+            android:parentActivityName=".Stock.StockActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Stock.StockActivity" />
@@ -121,7 +134,8 @@
         <activity
             android:name=".LogIn.Profile"
             android:label="Cerrar Sesión"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -129,7 +143,8 @@
         <activity
             android:name=".LogIn.Register"
             android:label="Registrarse"
-            android:parentActivityName=".LogIn.LogIn">
+            android:parentActivityName=".LogIn.LogIn"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.LogIn.LogIn" />
@@ -137,7 +152,8 @@
         <activity
             android:name=".LogIn.LogIn"
             android:label="Iniciar Sesión"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -145,7 +161,8 @@
         <activity
             android:name=".Client.EditClient"
             android:label="Editar Cliente"
-            android:parentActivityName=".Client.ClientDetail">
+            android:parentActivityName=".Client.ClientDetail"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Client.ClientDetail" />
@@ -153,7 +170,8 @@
         <activity
             android:name=".Client.ClientDetail"
             android:label="Detalle Cliente"
-            android:parentActivityName=".Client.ClientActivity">
+            android:parentActivityName=".Client.ClientActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Client.ClientActivity" />
@@ -161,7 +179,8 @@
         <activity
             android:name=".Client.AddClient"
             android:label="Añadir"
-            android:parentActivityName=".Client.ClientActivity">
+            android:parentActivityName=".Client.ClientActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Client.ClientActivity" />
@@ -169,7 +188,8 @@
         <activity
             android:name=".Stock.StockActivity"
             android:label="Stock"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -177,7 +197,8 @@
         <activity
             android:name=".Order.OrderActivity"
             android:label="Pedidos"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -185,7 +206,8 @@
         <activity
             android:name=".Client.ClientActivity"
             android:label="Clientes"
-            android:parentActivityName=".Main.MainActivity">
+            android:parentActivityName=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anjovaca.gestipedi.Main.MainActivity" />
@@ -193,7 +215,8 @@
         <activity
             android:name=".Main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

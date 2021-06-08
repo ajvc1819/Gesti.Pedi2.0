@@ -57,10 +57,10 @@ public class StockActivity extends AppCompatActivity implements
         categoryModelList = dbGestiPedi.getCategories();
         btnAddProduct = findViewById(R.id.btnAddProduct);
         obtenerLista();
-        setSpinner();
         getPreferences();
         setRecyclerView();
         setEditTextEvent();
+        setSpinner();
 
         if(!rol.equals("Administrador")){
             btnAddProduct.setVisibility(View.INVISIBLE);
@@ -73,10 +73,10 @@ public class StockActivity extends AppCompatActivity implements
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         categoryModelList = dbGestiPedi.getCategories();
         obtenerLista();
-        setSpinner();
         getPreferences();
         setRecyclerView();
         setEditTextEvent();
+        setSpinner();
     }
 
     //Función que permite establecer los elementos necesarios para el funcionamiento correcto del RecyclerView.

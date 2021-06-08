@@ -15,12 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.DbGestiPedi;
 import com.anjovaca.gestipedi.DB.Models.OrderDetailModel;
 import com.anjovaca.gestipedi.DB.Models.OrderModel;
 import com.anjovaca.gestipedi.DB.Models.ProductsModel;
+import com.anjovaca.gestipedi.DB.Models.UserModel;
 import com.anjovaca.gestipedi.LogIn.LogIn;
 import com.anjovaca.gestipedi.LogIn.Profile;
 import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
@@ -39,6 +41,8 @@ public class OrderDetail extends AppCompatActivity {
     public List<OrderModel> orderModelList;
     public List<OrderDetailModel> orderDetailModelList;
     public String rol;
+    String userOrderName, userLoggedName;
+    int userLogged;
     public boolean login;
     Button btnEdit, btnDelete, btnCancel, btnSend;
     public static final String EXTRA_LOGED_IN =
@@ -209,18 +213,31 @@ public class OrderDetail extends AppCompatActivity {
         orderId = mPreferences.getInt(ORDER_ID_KEY, orderId);
         String ROL_KEY = "rol";
         rol = mPreferences.getString(ROL_KEY, rol);
+        String USER_KEY = "user";
+        userLogged = mPreferences.getInt(USER_KEY, userLogged);
     }
 
     //Función que permite la edición de un pedido en proceso.
     public void editOrder(View view) {
-        if (orderId == 0 || orderId == id) {
-            orderId = id;
-            Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
-            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-            String ORDER_ID_KEY = "id";
-            preferencesEditor.putInt(ORDER_ID_KEY, orderId);
-            preferencesEditor.apply();
-            startActivity(intent);
+
+        List<UserModel>userModelList = dbGestiPedi.getUsersById(userLogged);
+        userLoggedName = userModelList.get(0).getName();
+
+        if ((orderId == 0 || orderId == id)) {
+            if (userLoggedName.equals(userOrderName)) {
+                orderId = id;
+                Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                String ORDER_ID_KEY = "id";
+                preferencesEditor.putInt(ORDER_ID_KEY, orderId);
+                preferencesEditor.apply();
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "No puedes editar un pedido creado por otro usuario.", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), "No puedes editar el pedido ya que ya existe otro activo.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -278,6 +295,7 @@ public class OrderDetail extends AppCompatActivity {
                 client.setText(cursor.getString(1));
                 date.setText(cursor.getString(2));
                 state.setText(cursor.getString(3));
+                userOrderName = cursor.getString(4);
                 user.setText(cursor.getString(4));
                 total.setText(cursor.getDouble(5) + "€");
             } while ((cursor.moveToNext()));

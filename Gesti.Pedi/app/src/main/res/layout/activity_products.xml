@@ -64,10 +64,9 @@
         android:text="@string/products"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/rvProducts"
+        app:layout_constraintBottom_toTopOf="@+id/etBuscarN"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitulo"
-        app:layout_constraintVertical_bias="0.762" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducts"
@@ -86,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="16dp"
         android:autofillHints=""
         android:backgroundTint="#FFFFFF"
         android:ems="10"
@@ -93,9 +93,7 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnAddProduct"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddProduct"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/spnSearchCategory"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="LabelFor"
         tools:targetApi="lollipop" />
@@ -106,13 +104,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/tvProduct"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddProduct"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/rvProducts"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etBuscarN"
-        app:layout_constraintVertical_bias="0.291"
         tools:targetApi="lollipop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
