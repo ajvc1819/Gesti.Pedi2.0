@@ -49,7 +49,7 @@ public class ClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client);
 
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
-
+        btnAddClient = findViewById(R.id.btnAddClient);
         clientModelList = dbGestiPedi.showClients();
 
         setRecyclerView();

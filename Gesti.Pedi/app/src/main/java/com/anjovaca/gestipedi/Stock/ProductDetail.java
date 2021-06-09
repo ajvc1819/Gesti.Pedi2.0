@@ -191,7 +191,7 @@ public class ProductDetail extends AppCompatActivity {
         rol = mPreferences.getString(ROL_KEY, rol);
     }
 
-    //Función que se utiliza para obtener y mostrar los datos relativos a los productos.
+    //Función que se utiliza para obtener y mostrar los datos relativos a los productos relacionados con las categorías.
     @SuppressLint("SetTextI18n")
     public void setProductsData() {
         SQLiteDatabase db = dbGestiPedi.getReadableDatabase();

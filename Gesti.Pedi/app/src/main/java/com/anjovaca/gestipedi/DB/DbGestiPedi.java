@@ -18,6 +18,9 @@ import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.DB.Models.UserModel;
 import com.anjovaca.gestipedi.DB.Models.OrderDetailModel;
 import com.anjovaca.gestipedi.DB.Models.OrderModel;
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -83,7 +86,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<ClientModel> getClientsById(int idClient) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Clients WHERE id = '" + idClient + "' ", null);
+                "FROM Clients WHERE id = '" + idClient + "' ", null);
         List<ClientModel> clients = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -98,7 +101,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<ClientModel> showClients() {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Clients", null);
+                "FROM Clients", null);
         List<ClientModel> clients = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -113,8 +116,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<ClientModel> checkClient(String dni, String phone, String email) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Clients " +
-                                                                  "WHERE Dni = '" + dni + "' OR telefono = '" + phone + "' OR correo = '" + email + "'", null);
+                "FROM Clients " +
+                "WHERE Dni = '" + dni + "' OR telefono = '" + phone + "' OR correo = '" + email + "'", null);
         List<ClientModel> clients = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -172,7 +175,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<UserModel> getUsers() {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Users", null);
+                "FROM Users", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -217,7 +220,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<UserModel> getUsersById(int idUser) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Users WHERE id = '" + idUser + "' ", null);
+                "FROM Users WHERE id = '" + idUser + "' ", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -232,8 +235,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<UserModel> initSession(String username, String password) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Users " +
-                                                                  "WHERE usuario = '" + username + "' AND contraseña = '" + password + "'", null);
+                "FROM Users " +
+                "WHERE usuario = '" + username + "' AND contraseña = '" + password + "'", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -248,7 +251,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<UserModel> checkUsers(String username) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Users WHERE usuario = '" + username + "'", null);
+                "FROM Users WHERE usuario = '" + username + "'", null);
         List<UserModel> users = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -278,7 +281,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<ProductsModel> showProducts() {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                   "FROM Products", null);
+                "FROM Products", null);
         List<ProductsModel> products = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -293,8 +296,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<ProductsModel> selectProductById(int idProduct) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Products " +
-                                                                  "WHERE id = '" + idProduct + "' ", null);
+                "FROM Products " +
+                "WHERE id = '" + idProduct + "' ", null);
         List<ProductsModel> products = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -312,8 +315,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("UPDATE Products " +
-                            "SET nombre = '" + name + "', descripcion = '" + description + "', stock = '" + stock + "', precio = '" + price + "', foto = '" + image + "', idCategoria = '" + category + "' " +
-                            "WHERE id = '" + id + "'");
+                        "SET nombre = '" + name + "', descripcion = '" + description + "', stock = '" + stock + "', precio = '" + price + "', foto = '" + image + "', idCategoria = '" + category + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -327,7 +330,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("DELETE FROM Products " +
-                           "WHERE id = '" + idProduct + "'");
+                        "WHERE id = '" + idProduct + "'");
                 db.close();
             } catch (Exception ex) {
                 Toast.makeText(context, "No se puede eliminar el producto seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
@@ -340,7 +343,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderModel> showOrders() {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Orders", null);
+                "FROM Orders", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -355,8 +358,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderModel> showOrdersByUser(int idUser) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Orders " +
-                                                                  "WHERE idUsuario = '" + idUser + "'", null);
+                "FROM Orders " +
+                "WHERE idUsuario = '" + idUser + "'", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -371,8 +374,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderModel> getOrderById(int id) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Orders " +
-                                                                  "WHERE id = '" + id + "'", null);
+                "FROM Orders " +
+                "WHERE id = '" + id + "'", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -394,7 +397,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("INSERT INTO Orders (fecha,idCliente,estado,total,idUsuario) " +
-                           "VALUES ('" + date + "', '" + idClient + "','" + state + "','" + total + "','" + idUser + "')");
+                        "VALUES ('" + date + "', '" + idClient + "','" + state + "','" + total + "','" + idUser + "')");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -412,7 +415,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("UPDATE Orders " +
-                            "SET estado = '" + state + "', fecha = '" + date + "' WHERE id = '" + id + "'");
+                        "SET estado = '" + state + "', fecha = '" + date + "' WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -428,8 +431,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("UPDATE Orders " +
-                           "SET estado = '" + state + "' " +
-                           "WHERE id = '" + id + "'");
+                        "SET estado = '" + state + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -445,8 +448,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("UPDATE Orders " +
-                           "SET estado = '" + state + "' " +
-                           "WHERE id = '" + id + "'");
+                        "SET estado = '" + state + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -461,7 +464,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("DELETE FROM Orders " +
-                           "WHERE id = '" + id + "'");
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -476,8 +479,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         if (db != null) {
             try {
                 db.execSQL("UPDATE Orders " +
-                           "SET total = '" + totalPrice + "' " +
-                           "WHERE id = '" + id + "'");
+                        "SET total = '" + totalPrice + "' " +
+                        "WHERE id = '" + id + "'");
                 db.close();
             } catch (Exception ex) {
                 Log.d("Tag", ex.toString());
@@ -490,8 +493,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderDetailModel> showOrderDetail(int idOrder) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM OrderDetails " +
-                                                                  "WHERE idPedido = '" + idOrder + "' ", null);
+                "FROM OrderDetails " +
+                "WHERE idPedido = '" + idOrder + "' ", null);
         List<OrderDetailModel> details = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -506,8 +509,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderDetailModel> getOrderDetailById(int id) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM OrderDetails " +
-                                                                  "WHERE id = '" + id + "' ", null);
+                "FROM OrderDetails " +
+                "WHERE id = '" + id + "' ", null);
         List<OrderDetailModel> details = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -570,8 +573,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderModel> selectLastOrder() {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Orders " +
-                                                                  "ORDER BY id DESC LIMIT 1", null);
+                "FROM Orders " +
+                "ORDER BY id DESC LIMIT 1", null);
         List<OrderModel> orders = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -586,8 +589,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<OrderDetailModel> checkOrderDetail(int idProduct, int idOrder) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM OrderDetails " +
-                                                                  "WHERE idPedido = '" + idOrder + "' AND idProducto = '" + idProduct + "'", null);
+                "FROM OrderDetails " +
+                "WHERE idPedido = '" + idOrder + "' AND idProducto = '" + idProduct + "'", null);
         List<OrderDetailModel> details = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -675,8 +678,8 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<CategoryModel> selectCategoryById(int id) {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                 "FROM Categories " +
-                                                                 "WHERE id = '" + id + "' ", null);
+                "FROM Categories " +
+                "WHERE id = '" + id + "' ", null);
         List<CategoryModel> categories = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
@@ -705,7 +708,7 @@ public class DbGestiPedi extends SQLiteOpenHelper {
     public List<CategoryModel> getCategories() {
         SQLiteDatabase db = getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
-                                                                  "FROM Categories", null);
+                "FROM Categories", null);
         List<CategoryModel> categories = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
