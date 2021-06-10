@@ -94,15 +94,14 @@ public class ShoppingCart extends AppCompatActivity {
         List<OrderDetailModel> orderDetailModelList = dbGestiPedi.showOrderDetail(orderId);
 
         if (orderDetailModelList.isEmpty()) {
-            setAlertDialog();
-        }
-        else {
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            setAlertDialogExit();
+        } else {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }
 
     //Función que permitirá mostrar un mensaje con botones de entrada para confirmar la acción de eliminar el pedido activo al salir del carrito por estar vacío.
-    private void setAlertDialog() {
+    private void setAlertDialogExit() {
         AlertDialog.Builder myAlertBuilder = new
                 AlertDialog.Builder(ShoppingCart.this);
 
@@ -126,6 +125,23 @@ public class ShoppingCart extends AppCompatActivity {
         myAlertBuilder.show();
     }
 
+    //Función que permitirá mostrar un mensaje con botones de entrada para confirmar la acción de confirmar el pedido activo.
+    private void setAlertDialogConfirm() {
+        AlertDialog.Builder myAlertBuilder = new
+                AlertDialog.Builder(ShoppingCart.this);
+
+        myAlertBuilder.setTitle("Importante");
+        myAlertBuilder.setMessage("¿Desea confirmar el pedido?");
+
+        myAlertBuilder.setPositiveButton("Confirmar", (dialog, which) -> {
+            confirmOrderCode();
+        });
+        myAlertBuilder.setNegativeButton("Cancelar", (dialog, which) -> {
+        });
+
+        myAlertBuilder.show();
+    }
+
     //Función que permite llamar a la actividad AddProductToShoppingCart.
     public void addProduct(View view) {
         Intent intent = new Intent(getApplicationContext(), AddProductToShoppingCart.class);
@@ -134,6 +150,16 @@ public class ShoppingCart extends AppCompatActivity {
 
     //Función que permite la confirmación del pedido que está en curso.
     public void confirmOrder(View view) {
+        if (!orderDetailModelList.isEmpty()) {
+            setAlertDialogConfirm();
+        } else {
+            Toast.makeText(getApplicationContext(), "No se puede confirmar un pedido vacío.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //Fución que permite cambiar el estado del pedido activo a Confirmado y reduce el Stock de los productos comprados.
+    private void confirmOrderCode() {
         List<OrderDetailModel> orderDetailModelList = dbGestiPedi.showOrderDetail(orderId);
         for (OrderDetailModel orderDetailModel : orderDetailModelList) {
             int quantity = orderDetailModel.getQuantity();
@@ -145,22 +171,16 @@ public class ShoppingCart extends AppCompatActivity {
             dbGestiPedi.decreaseStock(idProd, quantity, stock);
 
         }
+        dbGestiPedi.confirmOrder(orderId);
 
-        if (!orderDetailModelList.isEmpty()) {
-            dbGestiPedi.confirmOrder(orderId);
+        orderId = 0;
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        String ORDER_ID_KEY = "id";
+        preferencesEditor.putInt(ORDER_ID_KEY, orderId);
+        preferencesEditor.apply();
 
-            orderId = 0;
-            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-            String ORDER_ID_KEY = "id";
-            preferencesEditor.putInt(ORDER_ID_KEY, orderId);
-            preferencesEditor.apply();
-
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-
-        } else {
-            Toast.makeText(getApplicationContext(), "No se puede confirmar un pedido vacío.", Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     //Función que permite la eliminación del pedido que se encuentra en proceso.
