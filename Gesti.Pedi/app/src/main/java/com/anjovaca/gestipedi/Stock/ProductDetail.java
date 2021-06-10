@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +25,8 @@ import com.anjovaca.gestipedi.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetail extends AppCompatActivity {
@@ -192,24 +192,17 @@ public class ProductDetail extends AppCompatActivity {
     }
 
     //Función que se utiliza para obtener y mostrar los datos relativos a los productos relacionados con las categorías.
-    @SuppressLint("SetTextI18n")
     public void setProductsData() {
-        SQLiteDatabase db = dbGestiPedi.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT Products.nombre, Products.descripcion, Products.stock, Products.precio, Categories.nombre, Products.urlImagen  FROM Products INNER JOIN Categories ON Products.idCategoria = Categories.id WHERE Products.id ='" + id + "'", null);
+        ArrayList<String> productData = dbGestiPedi.getProductWithCategoryData(id);
 
-        if (cursor.moveToFirst()) {
-            do {
-                name.setText(cursor.getString(0));
-                description.setText(cursor.getString(1));
-                stock.setText(Integer.toString(cursor.getInt(2)));
-                price.setText(cursor.getDouble(3) + "€");
-                category.setText(cursor.getString(4));
-                FirebaseStorage storageReference = FirebaseStorage.getInstance();
-                StorageReference storageRef = storageReference.getReference();
-                storageRef.child(cursor.getString(5)).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(getApplicationContext()).load(uri.toString()).into(imageProduct));
-            } while ((cursor.moveToNext()));
-        }
-
+        name.setText(productData.get(0));
+        description.setText(productData.get(1));
+        stock.setText(productData.get(2));
+        price.setText(productData.get(3));
+        category.setText(productData.get(4));
+        FirebaseStorage storageReference = FirebaseStorage.getInstance();
+        StorageReference storageRef = storageReference.getReference();
+        storageRef.child(productData.get(5)).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(getApplicationContext()).load(uri.toString()).into(imageProduct));
     }
 
     //Función que permite regresar al menú principal al pulsar sobre el logotipo de la empresa.

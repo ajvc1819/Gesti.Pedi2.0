@@ -48,6 +48,9 @@ public class OrderActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
+        if (savedInstanceState != null) {
+            state = savedInstanceState.getString("state");
+        }
         getPreferences();
         setSpinner();
         setRecyclerView();
@@ -60,6 +63,12 @@ public class OrderActivity extends AppCompatActivity implements
         getPreferences();
         setSpinner();
         setRecyclerView();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("state", state);
     }
 
     //Función que nos permite crear los diferentes elementos que aparecen en el menú superior.

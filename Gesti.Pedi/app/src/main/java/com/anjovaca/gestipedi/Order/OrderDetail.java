@@ -1,14 +1,14 @@
 package com.anjovaca.gestipedi.Order;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +29,7 @@ import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
 import com.anjovaca.gestipedi.Main.MainActivity;
 import com.anjovaca.gestipedi.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetail extends AppCompatActivity {
@@ -76,21 +77,15 @@ public class OrderDetail extends AppCompatActivity {
         getOrderDetailData();
         setRecyclerView();
         getPreferences();
+        Resources res = getResources();
 
         if (!orderModelList.get(0).getState().equals("En Proceso")) {
-            btnDelete.setVisibility(View.INVISIBLE);
-            btnEdit.setVisibility(View.INVISIBLE);
-        } else {
-            btnDelete.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.VISIBLE);
+            btnDelete.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
-
-        if (orderModelList.get(0).getState().equals("Confirmado") && rol.equals("Administrador")) {
-            btnSend.setVisibility(View.VISIBLE);
-            btnCancel.setVisibility(View.VISIBLE);
-        } else {
-            btnSend.setVisibility(View.INVISIBLE);
-            btnCancel.setVisibility(View.INVISIBLE);
+        if (!orderModelList.get(0).getState().equals("Confirmado") || !rol.equals("Administrador")) {
+            btnSend.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnCancel.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
     }
 
@@ -119,21 +114,16 @@ public class OrderDetail extends AppCompatActivity {
         getOrderDetailData();
         setRecyclerView();
         getPreferences();
+        Resources res = getResources();
 
-        if (orderModelList.get(0).getState().equals("En Proceso")) {
-            btnDelete.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.VISIBLE);
-        } else {
-            btnDelete.setVisibility(View.INVISIBLE);
-            btnEdit.setVisibility(View.INVISIBLE);
+        if (!orderModelList.get(0).getState().equals("En Proceso") || !orderModelList.get(0).getState().equals("Cancelado")) {
+            btnDelete.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
 
-        if (orderModelList.get(0).getState().equals("Confirmado") && rol.equals("Administrador")) {
-            btnSend.setVisibility(View.VISIBLE);
-            btnCancel.setVisibility(View.VISIBLE);
-        } else {
-            btnSend.setVisibility(View.INVISIBLE);
-            btnCancel.setVisibility(View.INVISIBLE);
+        if (!orderModelList.get(0).getState().equals("Confirmado") && !rol.equals("Administrador")) {
+            btnSend.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnCancel.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
     }
 
@@ -219,88 +209,107 @@ public class OrderDetail extends AppCompatActivity {
 
     //Función que permite la edición de un pedido en proceso.
     public void editOrder(View view) {
-
-        List<UserModel>userModelList = dbGestiPedi.getUsersById(userLogged);
+        List<UserModel> userModelList = dbGestiPedi.getUsersById(userLogged);
         userLoggedName = userModelList.get(0).getName();
+        if (orderModelList.get(0).getState().equals("En Proceso")) {
+            if ((orderId == 0 || orderId == id)) {
+                if (userLoggedName.equals(userOrderName)) {
+                    orderId = id;
+                    Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
+                    SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                    String ORDER_ID_KEY = "id";
+                    preferencesEditor.putInt(ORDER_ID_KEY, orderId);
+                    preferencesEditor.apply();
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "No puedes editar un pedido creado por otro usuario.", Toast.LENGTH_SHORT).show();
+                }
 
-        if ((orderId == 0 || orderId == id)) {
-            if (userLoggedName.equals(userOrderName)) {
-                orderId = id;
-                Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
-                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                String ORDER_ID_KEY = "id";
-                preferencesEditor.putInt(ORDER_ID_KEY, orderId);
-                preferencesEditor.apply();
-                startActivity(intent);
             } else {
-                Toast.makeText(getApplicationContext(), "No puedes editar un pedido creado por otro usuario.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No puedes editar el pedido, ya que ya existe otro activo.", Toast.LENGTH_SHORT).show();
             }
-
         } else {
-            Toast.makeText(getApplicationContext(), "No puedes editar el pedido ya que ya existe otro activo.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No puedes editar el pedido, ya que no está en proceso.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     //Función que permite eliminar un pedido.
     public void deleteOrder(View view) {
 
-        for (OrderDetailModel orderDetailModel : orderDetailModelList) {
-            dbGestiPedi.deleteOrderDetailById(orderDetailModel.getId());
+        if (orderModelList.get(0).getState().equals("En Proceso")) {
+            for (OrderDetailModel orderDetailModel : orderDetailModelList) {
+                dbGestiPedi.deleteOrderDetailById(orderDetailModel.getId());
+            }
+
+            dbGestiPedi.deleteOrder(id);
+
+            orderId = 0;
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            String ORDER_ID_KEY = "id";
+            preferencesEditor.putInt(ORDER_ID_KEY, orderId);
+            preferencesEditor.apply();
+            Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "No puedes eliminar el pedido, ya que no está en proceso.", Toast.LENGTH_SHORT).show();
         }
 
-        dbGestiPedi.deleteOrder(id);
-
-        orderId = 0;
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        String ORDER_ID_KEY = "id";
-        preferencesEditor.putInt(ORDER_ID_KEY, orderId);
-        preferencesEditor.apply();
-        Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
-        startActivity(intent);
     }
 
     //Función que permite enviar un pedido.
     public void sendOrder(View view) {
-        dbGestiPedi.sendOrder(id);
-        finish();
+        if (orderModelList.get(0).getState().equals("Confirmado")) {
+            if (rol.equals("Administrador")) {
+                dbGestiPedi.sendOrder(id);
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "No tienes permisos para enviar el pedido.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "No puedes enviar el pedido, ya que no está confirmado.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     //Función que permite cancelar un pedido.
     public void cancelOrder(View view) {
         List<OrderDetailModel> orderDetailModelList = dbGestiPedi.showOrderDetail(id);
-        for (OrderDetailModel orderDetailModel : orderDetailModelList) {
-            int quantity = orderDetailModel.getQuantity();
-            int idProd = orderDetailModel.getIdProduct();
+        if (orderModelList.get(0).getState().equals("Confirmado")) {
+            if (rol.equals("Administrador")) {
+                for (OrderDetailModel orderDetailModel : orderDetailModelList) {
+                    int quantity = orderDetailModel.getQuantity();
+                    int idProd = orderDetailModel.getIdProduct();
 
-            List<ProductsModel> products = dbGestiPedi.selectProductById(idProd);
-            int stock = products.get(0).getStock();
+                    List<ProductsModel> products = dbGestiPedi.selectProductById(idProd);
+                    int stock = products.get(0).getStock();
 
-            dbGestiPedi.increaseStock(idProd, quantity, stock);
+                    dbGestiPedi.increaseStock(idProd, quantity, stock);
 
+                }
+
+                dbGestiPedi.cancelOrder(id);
+                finish();
+
+            } else {
+                Toast.makeText(getApplicationContext(), "No tienes permisos para cancelar el pedido.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "No puedes cancelar el pedido, ya que no está confirmado.", Toast.LENGTH_SHORT).show();
         }
 
-        dbGestiPedi.cancelOrder(id);
-        finish();
     }
 
     //Función que permite obtener datos relativos a los detalles de los pedidos.
-    @SuppressLint("SetTextI18n")
     public void getOrderDetailData() {
-        SQLiteDatabase db = dbGestiPedi.getReadableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT Orders.id, Clients.empresa, fecha, estado, Users.nombre, total  FROM Orders INNER JOIN Clients ON Orders.idCliente = Clients.id INNER JOIN Users ON Orders.idUsuario = Users.id WHERE Orders.id ='" + id + "'", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                idOrder.setText(Integer.toString(cursor.getInt(0)));
-                client.setText(cursor.getString(1));
-                date.setText(cursor.getString(2));
-                state.setText(cursor.getString(3));
-                userOrderName = cursor.getString(4);
-                user.setText(cursor.getString(4));
-                total.setText(cursor.getDouble(5) + "€");
-            } while ((cursor.moveToNext()));
-        }
-
+        ArrayList<String> orderData = dbGestiPedi.getOrderWithUserAndClientData(id);
+        idOrder.setText(orderData.get(0));
+        client.setText(orderData.get(1));
+        date.setText(orderData.get(2));
+        state.setText(orderData.get(3));
+        userOrderName = orderData.get(4);
+        user.setText(orderData.get(5));
+        total.setText(orderData.get(6));
     }
 
     //Función que permite regresar al menú principal al pulsar sobre el logotipo de la empresa.

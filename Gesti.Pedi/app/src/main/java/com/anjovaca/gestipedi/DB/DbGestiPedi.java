@@ -18,9 +18,6 @@ import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.DB.Models.UserModel;
 import com.anjovaca.gestipedi.DB.Models.OrderDetailModel;
 import com.anjovaca.gestipedi.DB.Models.OrderModel;
-import com.bumptech.glide.Glide;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -277,6 +274,28 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         }
     }
 
+    //Función que permite obtener los datos de los productos relacionados con las categorías.
+    public ArrayList<String> getProductWithCategoryData(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT Products.nombre, Products.descripcion, Products.stock, Products.precio, Categories.nombre, Products.urlImagen  " +
+                                                                  "FROM Products INNER JOIN Categories ON Products.idCategoria = Categories.id " +
+                                                                  "WHERE Products.id ='" + id + "'", null);
+
+       ArrayList<String> productData = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                productData.add(cursor.getString(0));
+                productData.add(cursor.getString(1));
+                productData.add(Integer.toString(cursor.getInt(2)));
+                productData.add(cursor.getDouble(3) + "€");
+                productData.add(cursor.getString(4));
+                productData.add(cursor.getString(5));
+            } while ((cursor.moveToNext()));
+        }
+        return productData;
+    }
+
     //Función que permite mostrar los datos de todos los productos de la base de datos.
     public List<ProductsModel> showProducts() {
         SQLiteDatabase db = getReadableDatabase();
@@ -352,6 +371,30 @@ public class DbGestiPedi extends SQLiteOpenHelper {
             } while ((cursor.moveToNext()));
         }
         return orders;
+    }
+
+    //Función que permite obtener los datos de los productos relacionados con las categorías.
+    public ArrayList<String> getOrderWithUserAndClientData(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT Orders.id, Clients.empresa, fecha, estado, Users.nombre, total  " +
+                                                                    "FROM Orders INNER JOIN Clients ON Orders.idCliente = Clients.id INNER JOIN Users ON Orders.idUsuario = Users.id " +
+                                                                    "WHERE Orders.id ='" + id + "'", null);
+
+
+        ArrayList<String> orderData = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                orderData.add(Integer.toString(cursor.getInt(0)));
+                orderData.add(cursor.getString(1));
+                orderData.add(cursor.getString(2));
+                orderData.add(cursor.getString(3));
+                orderData.add(cursor.getString(4));
+                orderData.add(cursor.getString(4));
+                orderData.add(cursor.getDouble(5) + "€");
+            } while ((cursor.moveToNext()));
+        }
+        return orderData;
     }
 
     //Función que permite obtener los datos de todos los pedidos de la base de datos filtrados por usuarios.

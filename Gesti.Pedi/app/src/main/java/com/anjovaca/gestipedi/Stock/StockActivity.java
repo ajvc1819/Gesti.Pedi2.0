@@ -27,6 +27,9 @@ import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
 import com.anjovaca.gestipedi.Main.MainActivity;
 import com.anjovaca.gestipedi.Order.ShoppingCart;
 import com.anjovaca.gestipedi.R;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +59,11 @@ public class StockActivity extends AppCompatActivity implements
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         categoryModelList = dbGestiPedi.getCategories();
         btnAddProduct = findViewById(R.id.btnAddProduct);
+
+        if (savedInstanceState != null) {
+            category = savedInstanceState.getString("category");
+        }
+
         obtenerLista();
         getPreferences();
         setRecyclerView();
@@ -77,6 +85,12 @@ public class StockActivity extends AppCompatActivity implements
         setRecyclerView();
         setEditTextEvent();
         setSpinner();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NotNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("category",category);
     }
 
     //Función que permite establecer los elementos necesarios para el funcionamiento correcto del RecyclerView.
@@ -147,7 +161,7 @@ public class StockActivity extends AppCompatActivity implements
     //Función que permite establecer filtros de busqueda a un RecyclerView.
     public void filter(String nombre, String category) {
         ArrayList<ProductsModel> filterList = new ArrayList<>();
-        if (!category.equals("Todos") && (category != null)) {
+        if (!category.equals("Todos")) {
             for (ProductsModel product : productsModelList) {
                 List<CategoryModel> categoryModelList = dbGestiPedi.selectCategoryById(product.getCategory());
                 if (product.getName().toLowerCase().contains(nombre.toLowerCase()) && categoryModelList.get(0).getName().toLowerCase().contains(category.toLowerCase())) {
