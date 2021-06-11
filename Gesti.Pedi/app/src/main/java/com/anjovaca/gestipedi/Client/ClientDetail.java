@@ -1,9 +1,11 @@
 package com.anjovaca.gestipedi.Client;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,13 +78,14 @@ public class ClientDetail extends AppCompatActivity {
         email.setText(clientModelList.get(0).getEmail());
 
         getPreferences();
+        Resources res = getResources();
 
         btnEdit = findViewById(R.id.btnEditClient);
         btnDelete = findViewById(R.id.btnDeleteClient);
 
         if (!rol.equals("Administrador")) {
-            btnDelete.setVisibility(View.INVISIBLE);
-            btnEdit.setVisibility(View.INVISIBLE);
+            btnDelete.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
     }
 
@@ -194,20 +197,27 @@ public class ClientDetail extends AppCompatActivity {
 
     //Función que permite la eliminación de un cliente de la base de datos.
     public void deleteClient(View view) {
-        try{
-            dbGestiPedi.deleteClient(id);
-            finish();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(), "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a el.", Toast.LENGTH_SHORT).show();
+        if(rol.equals("Administrador")){
+            try{
+                dbGestiPedi.deleteClient(id);
+                finish();
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), "No se puede eliminar el cliente seleccionado, ya que existen datos ligados a él.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(),"No tienes permisos para eliminar los datos de los clientes.",Toast.LENGTH_SHORT).show();
         }
-
     }
 
     //Función que nos permite hacer la llamada a la actividad EditClient.
     public void editClient(View view) {
-        Intent intent = new Intent(getApplicationContext(), EditClient.class);
-        intent.putExtra(EXTRA_ID, id);
-        startActivity(intent);
+        if(rol.equals("Administrador")){
+            Intent intent = new Intent(getApplicationContext(), EditClient.class);
+            intent.putExtra(EXTRA_ID, id);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(),"No tienes permisos para editar los datos de los clientes.",Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Función que permite la creación de un nuevo pedido.

@@ -134,13 +134,13 @@ public class CategoryDetail extends AppCompatActivity {
         orderId = mPreferences.getInt(ORDER_ID_KEY, orderId);
     }
 
-    //Función que permite la eliminación de una categoria de la base de datos.
+    //Función que permite la eliminación de una categoría de la base de datos.
     public void deleteCategory(View view) {
         dbGestiPedi.deleteCategory(id, getApplicationContext());
         finish();
     }
 
-    //Función que permite la edición de una categoria de la base de datos.
+    //Función que permite la edición de una categoría de la base de datos.
     public void editCategory(View view) {
         Intent intent = new Intent(getApplicationContext(), EditCategory.class);
         intent.putExtra(EXTRA_ID, id);

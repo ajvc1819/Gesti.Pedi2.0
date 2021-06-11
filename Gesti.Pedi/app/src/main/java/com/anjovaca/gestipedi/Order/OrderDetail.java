@@ -29,6 +29,7 @@ import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
 import com.anjovaca.gestipedi.Main.MainActivity;
 import com.anjovaca.gestipedi.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,6 +302,7 @@ public class OrderDetail extends AppCompatActivity {
     }
 
     //Función que permite obtener datos relativos a los detalles de los pedidos.
+    @SuppressLint("SetTextI18n")
     public void getOrderDetailData() {
         ArrayList<String> orderData = dbGestiPedi.getOrderWithUserAndClientData(id);
         idOrder.setText(orderData.get(0));
@@ -308,8 +310,10 @@ public class OrderDetail extends AppCompatActivity {
         date.setText(orderData.get(2));
         state.setText(orderData.get(3));
         userOrderName = orderData.get(4);
-        user.setText(orderData.get(5));
-        total.setText(orderData.get(6));
+        user.setText(userOrderName);
+        DecimalFormat df = new DecimalFormat("#.00");
+        String totalPrice = df.format(Double.parseDouble(orderData.get(5)));
+        total.setText(totalPrice + "€");
     }
 
     //Función que permite regresar al menú principal al pulsar sobre el logotipo de la empresa.

@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements View.OnClickListener {
@@ -67,7 +68,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
-        holder.price.setText(productsModelList.get(position).getPrice() + "€");
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        holder.price.setText(df.format(productsModelList.get(position).getPrice()) + "€");
         holder.name.setText(productsModelList.get(position).getName());
         holder.stock.setText("Stock: " + productsModelList.get(position).getStock());
         FirebaseStorage storageReference = FirebaseStorage.getInstance();

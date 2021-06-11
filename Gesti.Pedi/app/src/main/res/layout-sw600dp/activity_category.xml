@@ -50,7 +50,7 @@
         android:background="@drawable/buttons_style"
         android:onClick="addCategory"
         android:padding="5dp"
-        android:text="AÑADIR CATEGORÍA"
+        android:text="@string/addCategory"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:text="Categorías"
+        android:text="@string/categor_as"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

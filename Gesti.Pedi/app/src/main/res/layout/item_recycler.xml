@@ -25,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
@@ -37,7 +37,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -60,7 +60,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -58,7 +58,7 @@ public class AddCategory extends AppCompatActivity {
         return true;
     }
 
-    //Función que nos permite asignar las funcionalides de los diferentes elementos que aparecen en el menú superior.
+    //Función que nos permite asignar las funcionalidades de los diferentes elementos que aparecen en el menú superior.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

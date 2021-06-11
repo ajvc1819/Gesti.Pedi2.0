@@ -189,6 +189,7 @@ public class OrderActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    //Función que permite filtrar los pedidos por su estado.
     public void filter(String state) {
         ArrayList<OrderModel> filterList = new ArrayList<>();
         if (!state.equals("Todos")) {
@@ -204,6 +205,7 @@ public class OrderActivity extends AppCompatActivity implements
         orderAdapter.filter(filterList);
     }
 
+    //Función que permite llamar a la activity SelectClientForOrder para la creación de un nuevo pedido asociado a un cliente.
     public void addOrder(View view) {
         Intent intent = new Intent(getApplicationContext(), SelectClientForOrder.class);
         startActivity(intent);

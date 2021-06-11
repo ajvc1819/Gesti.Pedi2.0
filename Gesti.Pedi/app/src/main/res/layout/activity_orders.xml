@@ -92,6 +92,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOrders"
+        tools:targetApi="lollipop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package com.anjovaca.gestipedi.Stock;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.DbGestiPedi;
 import com.anjovaca.gestipedi.DB.Models.CategoryModel;
@@ -26,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,13 +72,14 @@ public class ProductDetail extends AppCompatActivity {
 
         productsModelList = dbGestiPedi.selectProductById(id);
         categoryModelList = dbGestiPedi.selectCategoryById(productsModelList.get(0).getCategory());
+        Resources res = getResources();
 
         setProductsData();
         getPreferences();
 
         if (!rol.equals("Administrador")) {
-            btnDelete.setVisibility(View.INVISIBLE);
-            btnEdit.setVisibility(View.INVISIBLE);
+            btnDelete.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
     }
 
@@ -168,15 +174,28 @@ public class ProductDetail extends AppCompatActivity {
 
     //Función que permite abrir la actividad EditProduct.
     public void editProduct(View view) {
-        Intent intent = new Intent(getApplicationContext(), EditProduct.class);
-        intent.putExtra(EXTRA_ID, id);
-        startActivity(intent);
+        if(rol.equals("Administrador")){
+            Intent intent = new Intent(getApplicationContext(), EditProduct.class);
+            intent.putExtra(EXTRA_ID, id);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(),"No tienes permisos para editar los datos de un producto.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     //Función que permite eliminar productos de la base de datos.
     public void deleteProduct(View view) {
-        dbGestiPedi.deleteProduct(id, getApplicationContext());
-        finish();
+        if(rol.equals("Administrador")) {
+            try{
+                dbGestiPedi.deleteProduct(id, getApplicationContext());
+                finish();
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), "No se puede eliminar el producto seleccionado, ya que existen datos ligados a él.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(),"No tienes permisos para eliminar los datos de un producto.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Función que permite la obtención de los datos almacenados en SharedPreferences.
@@ -192,13 +211,16 @@ public class ProductDetail extends AppCompatActivity {
     }
 
     //Función que se utiliza para obtener y mostrar los datos relativos a los productos relacionados con las categorías.
+    @SuppressLint("SetTextI18n")
     public void setProductsData() {
         ArrayList<String> productData = dbGestiPedi.getProductWithCategoryData(id);
+        DecimalFormat df = new DecimalFormat("#.00");
 
         name.setText(productData.get(0));
         description.setText(productData.get(1));
         stock.setText(productData.get(2));
-        price.setText(productData.get(3));
+        String priceProduct = df.format(Double.parseDouble(productData.get(3)));
+        price.setText(priceProduct + "€");
         category.setText(productData.get(4));
         FirebaseStorage storageReference = FirebaseStorage.getInstance();
         StorageReference storageRef = storageReference.getReference();

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anjovaca.gestipedi.DB.Models.ClientModel;
 import com.anjovaca.gestipedi.DB.Models.OrderModel;
 import com.anjovaca.gestipedi.R;
+
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> implements View.OnClickListener {
@@ -60,7 +62,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String total = Double.toString((orderModelList.get(position).getTotal()));
+
         String name = "";
         for (ClientModel client : clientModelList) {
             if (client.getId() == orderModelList.get(position).getIdClient()) {
@@ -72,7 +74,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.nameClient.setText("Cliente: " + name);
         holder.date.setText(orderModelList.get(position).getDate());
         holder.state.setText(orderModelList.get(position).getState());
-        holder.total.setText(total + "€");
+        DecimalFormat df = new DecimalFormat("#.00");
+        holder.total.setText(df.format(orderModelList.get(position).getTotal()) + "€");
     }
 
     //Función que permite asignar un listener a la hora de hacer click en algunos de los elementos que se muestran en el RecyclerView.

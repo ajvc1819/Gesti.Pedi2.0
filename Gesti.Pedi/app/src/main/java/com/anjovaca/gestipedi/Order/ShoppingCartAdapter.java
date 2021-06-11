@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -141,7 +142,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.idDetail.setText(Integer.toString(orderDetailModelList.get(position).getId()));
         holder.quantity.setText(Integer.toString(orderDetailModelList.get(position).getQuantity()));
         holder.nameProd.setText(name);
-        holder.price.setText(orderDetailModelList.get(position).getPrice() + "€");
+        DecimalFormat df = new DecimalFormat("#.00");
+        holder.price.setText(df.format(orderDetailModelList.get(position).getPrice()) + "€");
         FirebaseStorage storageReference = FirebaseStorage.getInstance();
         StorageReference storageRef = storageReference.getReference();
         storageRef.child(image).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context).load(uri.toString()).into(holder.imageProd));
@@ -159,5 +161,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         this.orderDetailModelList = updatedList;
         notifyDataSetChanged();
     }
+
 
 }

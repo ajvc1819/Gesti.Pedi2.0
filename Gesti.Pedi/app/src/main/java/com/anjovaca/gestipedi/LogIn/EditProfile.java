@@ -138,7 +138,7 @@ public class EditProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Función que permite cancelar la acción que se esta desarrollando y cerrar la actividad.
+    //Función que permite cancelar la acción que se está desarrollando y cerrar la actividad.
     public void cancel(View view) {
         finish();
     }

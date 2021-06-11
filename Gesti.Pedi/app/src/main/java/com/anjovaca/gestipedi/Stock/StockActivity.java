@@ -179,7 +179,7 @@ public class StockActivity extends AppCompatActivity implements
         productAdapter.filter(filterList);
     }
 
-    //Función que permite obtener la lista de categorias.
+    //Función que permite obtener la lista de categorías.
     public void obtenerLista() {
         categoryList = new ArrayList<>();
         categoryList.add("Todos");

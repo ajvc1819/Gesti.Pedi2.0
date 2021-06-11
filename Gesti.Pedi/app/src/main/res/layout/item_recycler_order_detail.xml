@@ -17,15 +17,15 @@
 
             <ImageView
                 android:id="@+id/imgProdSho"
-                android:layout_width="335dp"
-                android:layout_height="150dp"
+                android:layout_width="173dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/logo"
                 app:srcCompat="@drawable/logotipo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -44,7 +44,7 @@
                     android:layout_marginBottom="20dp"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
@@ -64,7 +64,7 @@
                         android:layout_marginRight="5dp"
                         android:text="@string/Quantity"
                         android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tvCantidadSho"
@@ -75,7 +75,7 @@
                         android:layout_marginRight="5dp"
                         android:text="TextView"
                         android:textColor="#FFFFFF"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         tools:ignore="HardcodedText" />
 
                 </LinearLayout>
@@ -91,7 +91,7 @@
                     android:gravity="end"
                     android:text="TextView"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText" />
 
             </LinearLayout>

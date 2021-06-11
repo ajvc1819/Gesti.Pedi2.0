@@ -76,6 +76,8 @@ public class AddProduct extends AppCompatActivity implements
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             image.setImageURI(imageUri);
+            StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+            dataPath.putFile(imageUri);
         }
     }
 
@@ -163,7 +165,7 @@ public class AddProduct extends AppCompatActivity implements
 
     }
 
-    //Función que permite la selección de imagenes de la galeria.
+    //Función que permite la selección de imágenes de la galeria.
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void selectImage(View view) {
         Intent gallery = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -177,10 +179,9 @@ public class AddProduct extends AppCompatActivity implements
                 int stockInt = Integer.parseInt(stock.getText().toString());
                 double priceDouble = Double.parseDouble(price.getText().toString());
                 StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-                dataPath.putFile(imageUri);
                 String urlImage = dataPath.getPath();
                 dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
-                finish();
+                startActivity(new Intent(getApplicationContext(),StockActivity.class));
             }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();

@@ -56,12 +56,14 @@ public class EditProduct extends AppCompatActivity implements
     String rol;
     public static final String EXTRA_LOGED_IN =
             "com.example.android.twoactivities.extra.login";
+    StorageReference storageReference;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
+        storageReference = FirebaseStorage.getInstance().getReference();
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         Intent intent = getIntent();
         id = intent.getIntExtra(ProductDetail.EXTRA_ID, 0);
@@ -95,14 +97,18 @@ public class EditProduct extends AppCompatActivity implements
         priceDouble = Double.parseDouble(price.getText().toString());
         if (imageUri == null) {
             if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty())
-                dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, productsModelList.get(0).getImage(), category);
+                dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, productsModelList.get(0).getImage(), category, productsModelList.get(0).getUrlImage());
             else
                 Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
         } else {
-            if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty())
-                dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category);
-            else
+            if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty()) {
+                StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+                dataPath.putFile(imageUri);
+                String urlImage = dataPath.getPath();
+                dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
+            } else {
                 Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
+            }
         }
         finish();
     }
@@ -162,7 +168,7 @@ public class EditProduct extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
             return true;
         }
@@ -217,7 +223,7 @@ public class EditProduct extends AppCompatActivity implements
         return true;
     }
 
-    //Función que permite la selección de categorias en el spinner.
+    //Función que permite la selección de categorías en el spinner.
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         category = categoryModelList.get(position).getId();

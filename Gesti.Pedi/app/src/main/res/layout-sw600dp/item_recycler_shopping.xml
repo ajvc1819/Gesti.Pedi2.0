@@ -35,8 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="1"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    tools:ignore="NestedWeights" />
 
                 <ImageButton
                     android:id="@+id/deleteDetail"
@@ -48,7 +48,8 @@
                     android:layout_weight="1"
                     android:background="#00000000"
                     app:srcCompat="@drawable/delete_detail"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat"
+                    android:contentDescription="@string/imageproduct" />
 
                 <TextView
                     android:id="@+id/tvNombreSho"
