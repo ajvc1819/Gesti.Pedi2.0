@@ -80,6 +80,7 @@
     <string name="icono_pedido">Icono Pedido</string>
     <string name="categor_as">Categorías</string>
     <string name="imgproduct">imgProduct</string>
+    <string name="saveImage">Guardar Imagen</string>
 
 
     <string-array name="states_array">

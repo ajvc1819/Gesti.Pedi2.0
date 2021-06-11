@@ -57,6 +57,7 @@ public class EditProduct extends AppCompatActivity implements
     public static final String EXTRA_LOGED_IN =
             "com.example.android.twoactivities.extra.login";
     StorageReference storageReference;
+    boolean pushedImage = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -103,7 +104,6 @@ public class EditProduct extends AppCompatActivity implements
         } else {
             if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty()) {
                 StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-                dataPath.putFile(imageUri);
                 String urlImage = dataPath.getPath();
                 dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
             } else {
@@ -260,5 +260,19 @@ public class EditProduct extends AppCompatActivity implements
     public void returnMainMenu(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+    }
+
+    //Función que permite guardar la imagen en Cloud Storage.
+    public void pushImage(View view) {
+        if(imageUri != null){
+            StorageReference lastImage = storageReference.child(productsModelList.get(0).getUrlImage());
+            lastImage.delete();
+            StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+            dataPath.putFile(imageUri);
+            pushedImage = true;
+            Toast.makeText(getApplicationContext(),"Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(),"No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

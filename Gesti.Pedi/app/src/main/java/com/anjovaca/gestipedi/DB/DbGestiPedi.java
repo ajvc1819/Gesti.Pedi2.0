@@ -330,6 +330,22 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         return products;
     }
 
+    //Función que permite comprobar que no se introduzca la misma imagen para productos diferentes.
+    public List<ProductsModel> checkProductImage(String urlImage) {
+        SQLiteDatabase db = getReadableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * " +
+                "FROM Products " +
+                "WHERE urlImage = '" + urlImage + "' ", null);
+        List<ProductsModel> products = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                products.add(new ProductsModel(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4), cursor.getDouble(5), cursor.getString(6), cursor.getString(7)));
+            } while ((cursor.moveToNext()));
+        }
+        return products;
+    }
+
     //Función que permite la edición de los datos de un producto.
     public void editProduct(int id, String name, String description, int stock, double price, String image, int category, String urlImage) {
         SQLiteDatabase db = getWritableDatabase();

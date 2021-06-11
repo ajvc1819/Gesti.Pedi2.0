@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.UnicodeSetSpanner;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.anjovaca.gestipedi.Category.CategoryActivity;
 import com.anjovaca.gestipedi.DB.DbGestiPedi;
 import com.anjovaca.gestipedi.DB.Models.CategoryModel;
+import com.anjovaca.gestipedi.DB.Models.ProductsModel;
 import com.anjovaca.gestipedi.LogIn.LogIn;
 import com.anjovaca.gestipedi.LogIn.Profile;
 import com.anjovaca.gestipedi.LogIn.RegisterAdministrator;
@@ -51,6 +53,7 @@ public class AddProduct extends AppCompatActivity implements
     public static final String EXTRA_LOGED_IN =
             "com.example.android.twoactivities.extra.login";
     StorageReference storageReference;
+    boolean pushedImage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +78,18 @@ public class AddProduct extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
-            image.setImageURI(imageUri);
             StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-            dataPath.putFile(imageUri);
+            String urlImage = dataPath.getPath();
+            List<ProductsModel> repeatedImageList = dbGestiPedi.checkProductImage(urlImage);
+
+            if(repeatedImageList.isEmpty()){
+                image.setImageURI(imageUri);
+            } else {
+                imageUri = null;
+                Toast.makeText(getApplicationContext(),"La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 
@@ -176,12 +188,20 @@ public class AddProduct extends AppCompatActivity implements
     public void insertProduct(View view) {
         try {
             if (!imageUri.toString().isEmpty() && !name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty()) {
-                int stockInt = Integer.parseInt(stock.getText().toString());
-                double priceDouble = Double.parseDouble(price.getText().toString());
-                StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-                String urlImage = dataPath.getPath();
-                dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
-                startActivity(new Intent(getApplicationContext(),StockActivity.class));
+
+                if(pushedImage){
+                    int stockInt = Integer.parseInt(stock.getText().toString());
+                    double priceDouble = Double.parseDouble(price.getText().toString());
+                    StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+                    String urlImage = dataPath.getPath();
+
+
+                    dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
+                    startActivity(new Intent(getApplicationContext(),StockActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), "No se ha guardado la imagen.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
@@ -220,5 +240,17 @@ public class AddProduct extends AppCompatActivity implements
     public void returnMainMenu(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+    }
+
+    public void pushImage(View view) {
+        if(imageUri != null){
+            StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+            dataPath.putFile(imageUri);
+            pushedImage = true;
+            Toast.makeText(getApplicationContext(),"Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(),"No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

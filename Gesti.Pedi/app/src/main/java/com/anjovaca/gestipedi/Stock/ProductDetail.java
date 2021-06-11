@@ -42,7 +42,7 @@ public class ProductDetail extends AppCompatActivity {
     int id;
     TextView name, description, stock, price, category;
     ImageView imageProduct;
-
+    StorageReference storageReference;
     public List<ProductsModel> productsModelList;
     int orderId;
     public boolean login;
@@ -58,6 +58,7 @@ public class ProductDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
+        storageReference = FirebaseStorage.getInstance().getReference();
         Intent intent = getIntent();
         id = intent.getIntExtra(StockActivity.EXTRA_PRODUCT_ID, 0);
 
@@ -189,6 +190,7 @@ public class ProductDetail extends AppCompatActivity {
         if(rol.equals("Administrador")) {
             try{
                 dbGestiPedi.deleteProduct(id, getApplicationContext());
+                storageReference.child(productsModelList.get(0).getUrlImage()).delete();
                 finish();
             } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), "No se puede eliminar el producto seleccionado, ya que existen datos ligados a él.", Toast.LENGTH_SHORT).show();

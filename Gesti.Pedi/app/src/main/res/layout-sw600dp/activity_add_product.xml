@@ -262,22 +262,38 @@
 
                 <ImageView
                     android:id="@+id/imgImagenProdA"
-                    android:layout_width="250dp"
+                    android:layout_width="930dp"
                     android:layout_height="250dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/imageproduct"
                     android:textSize="18sp"
-                    android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/avatars"
-                    android:contentDescription="@string/imageproduct" />
+                    tools:srcCompat="@tools:sample/avatars" />
 
-                <Button
-                    android:id="@+id/btnSelectImgProdA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/buttons_style"
-                    android:onClick="selectImage"
-                    android:text="@string/selectImage"
-                    android:textColor="#FFFFFF" />
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnSelectImgProdA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttons_style"
+                        android:onClick="selectImage"
+                        android:text="@string/selectImage"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/btnPushImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/buttons_style"
+                        android:onClick="pushImage"
+                        android:text="@string/saveImage"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
 
             </LinearLayout>
 
