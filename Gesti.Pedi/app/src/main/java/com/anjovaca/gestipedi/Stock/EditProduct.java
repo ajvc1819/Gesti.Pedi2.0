@@ -97,20 +97,28 @@ public class EditProduct extends AppCompatActivity implements
         stockInt = Integer.parseInt(stock.getText().toString());
         priceDouble = Double.parseDouble(price.getText().toString());
         if (imageUri == null) {
-            if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty())
+            if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty()) {
                 dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, productsModelList.get(0).getImage(), category, productsModelList.get(0).getUrlImage());
-            else
+                finish();
+            } else {
                 Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
+            }
         } else {
             if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty()) {
-                StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-                String urlImage = dataPath.getPath();
-                dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
+                if (pushedImage) {
+                    StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+                    String urlImage = dataPath.getPath();
+                    dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No se ha guardado la imagen.", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
             }
         }
-        finish();
+
+
     }
 
     //Función que establecer los datos que se mostrarán en el Spinner.
@@ -159,7 +167,16 @@ public class EditProduct extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
-            image.setImageURI(imageUri);
+            StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+            String urlImage = dataPath.getPath();
+            List<ProductsModel> repeatedImageList = dbGestiPedi.checkProductImage(urlImage);
+
+            if (repeatedImageList.isEmpty()) {
+                image.setImageURI(imageUri);
+            } else {
+                imageUri = null;
+                Toast.makeText(getApplicationContext(), "La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -264,15 +281,15 @@ public class EditProduct extends AppCompatActivity implements
 
     //Función que permite guardar la imagen en Cloud Storage.
     public void pushImage(View view) {
-        if(imageUri != null){
+        if (imageUri != null) {
             StorageReference lastImage = storageReference.child(productsModelList.get(0).getUrlImage());
             lastImage.delete();
             StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
             dataPath.putFile(imageUri);
             pushedImage = true;
-            Toast.makeText(getApplicationContext(),"Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(),"No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
         }
     }
 }
