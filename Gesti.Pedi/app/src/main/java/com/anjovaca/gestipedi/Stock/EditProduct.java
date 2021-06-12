@@ -59,6 +59,7 @@ public class EditProduct extends AppCompatActivity implements
     StorageReference storageReference;
     boolean pushedImage = false;
 
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

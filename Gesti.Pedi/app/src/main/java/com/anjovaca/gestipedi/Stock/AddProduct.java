@@ -2,10 +2,11 @@ package com.anjovaca.gestipedi.Stock;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.text.UnicodeSetSpanner;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -54,6 +56,8 @@ public class AddProduct extends AppCompatActivity implements
             "com.example.android.twoactivities.extra.login";
     StorageReference storageReference;
     boolean pushedImage = false;
+    private Button btnSaveImage;
+    Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,10 @@ public class AddProduct extends AppCompatActivity implements
         description = findViewById(R.id.etDescripcionProdA);
         stock = findViewById(R.id.etStockProdA);
         price = findViewById(R.id.etPrecioProdA);
+
+        res = getResources();
+        btnSaveImage = findViewById(R.id.btnPushImage);
+        btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
     }
 
     //Función que permite mostrar la imagen.
@@ -84,9 +92,13 @@ public class AddProduct extends AppCompatActivity implements
 
             if(repeatedImageList.isEmpty()){
                 image.setImageURI(imageUri);
+                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.buttons_style, null));
+
             } else {
                 imageUri = null;
+                image.setImageURI(imageUri);
                 Toast.makeText(getApplicationContext(),"La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
+                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
             }
 
 
@@ -242,6 +254,7 @@ public class AddProduct extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    //Función que permite guardar la imagen en Cloud Storage.
     public void pushImage(View view) {
         if(imageUri != null){
             StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());

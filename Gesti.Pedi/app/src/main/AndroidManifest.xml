@@ -25,6 +25,7 @@
         <activity
             android:name=".Order.SelectClientForOrder"
             android:label="Seleccionar Cliente"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:parentActivityName=".Order.OrderActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -205,6 +206,7 @@
         <activity
             android:name=".Client.ClientActivity"
             android:label="Clientes"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:parentActivityName=".Main.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
