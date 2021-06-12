@@ -215,11 +215,11 @@ public class AddProduct extends AppCompatActivity implements
                 }
 
             } else {
-                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erróneo.", Toast.LENGTH_SHORT).show();
             }
 
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erróneo.", Toast.LENGTH_SHORT).show();
         }
     }
 

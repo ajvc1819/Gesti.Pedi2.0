@@ -111,7 +111,7 @@ public class EditProduct extends AppCompatActivity implements
                 dbGestiPedi.editProduct(id, name.getText().toString(), description.getText().toString(), stockInt, priceDouble, productsModelList.get(0).getImage(), category, productsModelList.get(0).getUrlImage());
                 finish();
             } else {
-                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erróneo.", Toast.LENGTH_SHORT).show();
             }
         } else {
             if (!name.getText().toString().isEmpty() && !description.getText().toString().isEmpty() && !stock.getText().toString().isEmpty() && !price.getText().toString().isEmpty()) {
@@ -124,7 +124,7 @@ public class EditProduct extends AppCompatActivity implements
                     Toast.makeText(getApplicationContext(), "No se ha guardado la imagen.", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erróneo.", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -180,14 +180,18 @@ public class EditProduct extends AppCompatActivity implements
             StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
             urlImage = dataPath.getPath();
             List<ProductsModel> repeatedImageList = dbGestiPedi.checkProductImage(urlImage);
+            List<ProductsModel> productsModelList = dbGestiPedi.selectProductById(id);
 
-            if (repeatedImageList.isEmpty()) {
+            if (repeatedImageList.isEmpty() || productsModelList.get(0).getUrlImage().equals(urlImage)) {
                 image.setImageURI(imageUri);
                 pushedImage = false;
-                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.buttons_style, null));
-
+                if (productsModelList.get(0).getUrlImage().equals(urlImage)) {
+                    pushedImage = true;
+                    btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+                } else {
+                    btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.buttons_style, null));
+                }
             } else {
-                imageUri = null;
                 Toast.makeText(getApplicationContext(), "La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
             }
         }
@@ -296,8 +300,6 @@ public class EditProduct extends AppCompatActivity implements
     public void pushImage(View view) {
         if (!pushedImage) {
             if (imageUri != null) {
-                StorageReference lastImage = storageReference.child(productsModelList.get(0).getUrlImage());
-                lastImage.delete();
                 StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
                 dataPath.putFile(imageUri);
                 pushedImage = true;

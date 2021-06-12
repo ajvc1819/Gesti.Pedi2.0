@@ -133,7 +133,7 @@ public class AddClient extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Alguno de los datos introducidos no es correcto o ya está en uso.", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Ha introducido un campo de manera erronea o algún campo esta vacío.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Ha introducido un campo de manera errónea o algún campo esta vacío.", Toast.LENGTH_SHORT).show();
         }
     }
 

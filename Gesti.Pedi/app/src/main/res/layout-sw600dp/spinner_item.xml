@@ -9,5 +9,5 @@
     android:gravity="left"
     android:padding="5dip"
     android:textColor="#FFFFFF"
-    android:textSize="14sp"
+    android:textSize="18sp"
     tools:ignore="RtlHardcoded" />

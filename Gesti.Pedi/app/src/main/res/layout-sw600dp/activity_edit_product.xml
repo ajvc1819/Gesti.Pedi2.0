@@ -307,7 +307,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/buttons_style"
                     android:onClick="editProduct"
-                    android:text="@string/add"
+                    android:text="@string/save"
                     android:textColor="#FFFFFF"
                     tools:ignore="ButtonStyle" />
 
