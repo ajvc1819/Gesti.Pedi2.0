@@ -92,6 +92,7 @@ public class AddProduct extends AppCompatActivity implements
 
             if(repeatedImageList.isEmpty()){
                 image.setImageURI(imageUri);
+                pushedImage = false;
                 btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.buttons_style, null));
 
             } else {
@@ -207,14 +208,16 @@ public class AddProduct extends AppCompatActivity implements
                     StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
                     String urlImage = dataPath.getPath();
 
-
                     dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
                     startActivity(new Intent(getApplicationContext(),StockActivity.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "No se ha guardado la imagen.", Toast.LENGTH_SHORT).show();
                 }
 
+            } else {
+                Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
             }
+
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Falta algún campo por rellenar o se ha introducido un campo erroneo.", Toast.LENGTH_SHORT).show();
         }
@@ -256,14 +259,20 @@ public class AddProduct extends AppCompatActivity implements
 
     //Función que permite guardar la imagen en Cloud Storage.
     public void pushImage(View view) {
-        if(imageUri != null){
-            StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-            dataPath.putFile(imageUri);
-            pushedImage = true;
-            Toast.makeText(getApplicationContext(),"Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+        if(!pushedImage){
+            if(imageUri != null){
+                StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+                dataPath.putFile(imageUri);
+                pushedImage = true;
+                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+                Toast.makeText(getApplicationContext(),"Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(),"No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(getApplicationContext(),"No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"La imagen seleccionada ya ha sido guardada con anterioridad.", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 }

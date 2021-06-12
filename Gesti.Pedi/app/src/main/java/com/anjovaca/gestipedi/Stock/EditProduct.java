@@ -2,10 +2,12 @@ package com.anjovaca.gestipedi.Stock;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -53,11 +56,13 @@ public class EditProduct extends AppCompatActivity implements
     ArrayList<String> categoryList;
     boolean login;
     int orderId;
-    String rol;
+    String rol, urlImage;
     public static final String EXTRA_LOGED_IN =
             "com.example.android.twoactivities.extra.login";
     StorageReference storageReference;
     boolean pushedImage = false;
+    Resources res;
+    private Button btnSaveImage;
 
 
     @SuppressLint("SetTextI18n")
@@ -81,6 +86,10 @@ public class EditProduct extends AppCompatActivity implements
         description = findViewById(R.id.etDescriptionProdE);
         stock = findViewById(R.id.etStockProdE);
         price = findViewById(R.id.etPriceProdE);
+
+        res = getResources();
+        btnSaveImage = findViewById(R.id.btnPushImage);
+        btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
 
         name.setText(productsModelList.get(0).getName());
         description.setText(productsModelList.get(0).getDescription());
@@ -169,11 +178,14 @@ public class EditProduct extends AppCompatActivity implements
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-            String urlImage = dataPath.getPath();
+            urlImage = dataPath.getPath();
             List<ProductsModel> repeatedImageList = dbGestiPedi.checkProductImage(urlImage);
 
             if (repeatedImageList.isEmpty()) {
                 image.setImageURI(imageUri);
+                pushedImage = false;
+                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.buttons_style, null));
+
             } else {
                 imageUri = null;
                 Toast.makeText(getApplicationContext(), "La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
@@ -282,15 +294,24 @@ public class EditProduct extends AppCompatActivity implements
 
     //Función que permite guardar la imagen en Cloud Storage.
     public void pushImage(View view) {
-        if (imageUri != null) {
-            StorageReference lastImage = storageReference.child(productsModelList.get(0).getUrlImage());
-            lastImage.delete();
-            StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-            dataPath.putFile(imageUri);
-            pushedImage = true;
-            Toast.makeText(getApplicationContext(), "Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+        if (!pushedImage) {
+            if (imageUri != null) {
+                StorageReference lastImage = storageReference.child(productsModelList.get(0).getUrlImage());
+                lastImage.delete();
+                StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
+                dataPath.putFile(imageUri);
+                pushedImage = true;
+                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+
+                dbGestiPedi.updateProductImage(id, imageUri.toString(), urlImage);
+                Toast.makeText(getApplicationContext(), "Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Toast.makeText(getApplicationContext(), "No se ha seleccionado ninguna imagen o no se ha modificado la imagen.", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(getApplicationContext(), "No se ha seleccionado ninguna imagen o no se ha modificado la imagen.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "La imagen ya se ha guardado en la base de datos con anterioridad.", Toast.LENGTH_SHORT).show();
         }
+
     }
 }
