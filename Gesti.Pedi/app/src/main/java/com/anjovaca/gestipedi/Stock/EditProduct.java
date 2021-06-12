@@ -290,7 +290,7 @@ public class EditProduct extends AppCompatActivity implements
             pushedImage = true;
             Toast.makeText(getApplicationContext(), "Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(), "No se ha seleccionado ninguna imagen.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No se ha seleccionado ninguna imagen o no se ha modificado la imagen.", Toast.LENGTH_SHORT).show();
         }
     }
 }
