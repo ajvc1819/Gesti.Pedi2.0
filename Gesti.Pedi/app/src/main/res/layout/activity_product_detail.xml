@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="@string/descriptionTitle"
+                    android:text="@string/description"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvNomProdD" />

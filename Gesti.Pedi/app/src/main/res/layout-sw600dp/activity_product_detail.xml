@@ -127,11 +127,11 @@
                 <TextView
                     android:id="@+id/tvDescripcionProdD"
                     android:layout_width="100dp"
-                    android:textSize="18sp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="@string/descriptionTitle"
+                    android:text="@string/description"
                     android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvNomProdD" />
 

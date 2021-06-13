@@ -81,6 +81,7 @@
     <string name="categor_as">Categorías</string>
     <string name="imgproduct">imgProduct</string>
     <string name="saveImage">Guardar Imagen</string>
+    <string name="a_adir_categor_a">Añadir Categoría</string>
 
 
     <string-array name="states_array">

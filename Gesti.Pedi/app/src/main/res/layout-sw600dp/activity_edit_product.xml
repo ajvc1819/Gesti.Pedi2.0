@@ -153,14 +153,11 @@
                     <TextView
                         android:id="@+id/tvCategoryProdE"
                         android:layout_width="100dp"
-                        android:textSize="18sp"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
                         android:text="@string/category"
                         android:textColor="#FFFFFF"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -77,7 +77,7 @@
 
                 <TextView
                     android:id="@+id/tvNombreProdA"
-                    android:layout_width="86dp"
+                    android:layout_width="91dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:layout_marginStart="20dp"
@@ -150,13 +150,9 @@
 
                     <TextView
                         android:id="@+id/tvCategoryProdA"
-                        android:layout_width="70dp"
+                        android:layout_width="91dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
                         android:text="@string/category"
                         android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -165,8 +161,8 @@
 
                     <Spinner
                         android:id="@+id/spnCategorias"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="193dp"
+                        android:layout_height="43dp"
                         android:layout_weight="1"
                         android:backgroundTint="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -188,11 +184,11 @@
 
                 <TextView
                     android:id="@+id/tvStockProdA"
-                    android:layout_width="70dp"
+                    android:layout_width="91dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="@string/stock"
                     android:backgroundTint="#FFFFFF"
+                    android:text="@string/stock"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCategoryProdA"
@@ -224,7 +220,7 @@
 
                 <TextView
                     android:id="@+id/tvPrecioProdA"
-                    android:layout_width="70dp"
+                    android:layout_width="91dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/price"
@@ -257,11 +253,11 @@
 
                 <ImageView
                     android:id="@+id/imgImagenProdA"
-                    android:layout_width="250dp"
+                    android:layout_width="312dp"
                     android:layout_height="250dp"
                     android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/avatars"
-                    android:contentDescription="@string/imageproduct" />
+                    android:contentDescription="@string/imageproduct"
+                    tools:srcCompat="@tools:sample/avatars" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -271,7 +267,7 @@
 
                     <Button
                         android:id="@+id/btnSelectImgProdA"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/buttons_style"
                         android:onClick="selectImage"
@@ -280,8 +276,9 @@
 
                     <Button
                         android:id="@+id/btnPushImage"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/buttons_style"
                         android:onClick="pushImage"
                         android:text="@string/saveImage"
