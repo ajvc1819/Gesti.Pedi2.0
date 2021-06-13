@@ -78,10 +78,17 @@ public class OrderDetail extends AppCompatActivity {
         getOrderDetailData();
         setRecyclerView();
         getPreferences();
+
+        List<UserModel> userModelList = dbGestiPedi.getUsersById(userLogged);
+        userLoggedName = userModelList.get(0).getName();
+        
         Resources res = getResources();
 
         if (!orderModelList.get(0).getState().equals("En Proceso")) {
             btnDelete.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+        }
+        if(orderModelList.get(0).getState().equals("En Proceso") && !userLoggedName.equals(userOrderName)){
             btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
         if (!orderModelList.get(0).getState().equals("Confirmado") || !rol.equals("Administrador")) {
@@ -97,6 +104,9 @@ public class OrderDetail extends AppCompatActivity {
         dbGestiPedi = new DbGestiPedi(getApplicationContext());
         orderModelList = dbGestiPedi.getOrderById(id);
         orderDetailModelList = dbGestiPedi.showOrderDetail(id);
+
+        List<UserModel> userModelList = dbGestiPedi.getUsersById(userLogged);
+        userLoggedName = userModelList.get(0).getName();
 
         Intent intent = getIntent();
 
@@ -119,6 +129,10 @@ public class OrderDetail extends AppCompatActivity {
 
         if (!orderModelList.get(0).getState().equals("En Proceso") || !orderModelList.get(0).getState().equals("Cancelado")) {
             btnDelete.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+            btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
+        }
+
+        if(orderModelList.get(0).getState().equals("En Proceso") && !userLoggedName.equals(userOrderName)){
             btnEdit.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
         }
 
