@@ -153,10 +153,11 @@ public class EditClient extends AppCompatActivity {
         boolean dniValid = dni.getText().toString().matches("^[0-9]{8}[A-Za-z]$");
         if (dni.getText().toString().length() == 9 && dniValid && !name.getText().toString().isEmpty() && !lastname.getText().toString().isEmpty() && !enterprise.getText().toString().isEmpty() && cp.getText().toString().length() == 5 && !address.getText().toString().isEmpty() && !city.getText().toString().isEmpty() && !country.getText().toString().isEmpty() && phone.getText().toString().length() == 9 && !email.getText().toString().isEmpty()) {
             dbGestiPedi.editClient(id, dni.getText().toString(), name.getText().toString(), lastname.getText().toString(), enterprise.getText().toString(), address.getText().toString(), cp.getText().toString(), city.getText().toString(), country.getText().toString(), phone.getText().toString(), email.getText().toString());
+            finish();
         } else {
             Toast.makeText(getApplicationContext(), "No se han podido editar los datos del cliente.", Toast.LENGTH_SHORT).show();
         }
-        finish();
+
     }
 
     //Función que permite regresar al menú principal al pulsar sobre el logotipo de la empresa.
