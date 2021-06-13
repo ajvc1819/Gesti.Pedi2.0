@@ -70,7 +70,7 @@
         </activity>
         <activity
             android:name=".Category.CategoryActivity"
-            android:label="Categorias"
+            android:label="Categorías"
             android:parentActivityName=".Main.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -134,7 +134,7 @@
         </activity>
         <activity
             android:name=".LogIn.Profile"
-            android:label="Cerrar Sesión"
+            android:label="Perfil"
             android:parentActivityName=".Main.MainActivity"
             android:screenOrientation="portrait">
             <meta-data

@@ -147,9 +147,10 @@ public class EditProfile extends AppCompatActivity {
     public void editProfile(View view) {
         if (!name.getText().toString().isEmpty() && !lastName.getText().toString().isEmpty()) {
             dbGestiPedi.updateProfile(id, name.getText().toString(), lastName.getText().toString(), dni.getText().toString(), city.getText().toString(),country.getText().toString(),phone.getText().toString(),email.getText().toString());
+            finish();
         } else {
             Toast.makeText(getApplicationContext(), "No se han podido editar los datos del perfil.", Toast.LENGTH_SHORT).show();
         }
-        finish();
+
     }
 }
