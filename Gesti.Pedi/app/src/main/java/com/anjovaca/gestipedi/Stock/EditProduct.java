@@ -193,7 +193,8 @@ public class EditProduct extends AppCompatActivity implements
                 }
             } else {
                 imageUri = null;
-                image.setImageURI(null);
+                image.setImageURI(imageUri);
+                btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
                 Toast.makeText(getApplicationContext(), "La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
             }
         }
