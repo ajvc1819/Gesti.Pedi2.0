@@ -58,6 +58,7 @@ public class AddProduct extends AppCompatActivity implements
     boolean pushedImage = false;
     private Button btnSaveImage;
     Resources res;
+    String urlImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +86,10 @@ public class AddProduct extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+
             imageUri = data.getData();
             StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-            String urlImage = dataPath.getPath();
+            urlImage = dataPath.getPath();
             List<ProductsModel> repeatedImageList = dbGestiPedi.checkProductImage(urlImage);
 
             if(repeatedImageList.isEmpty()){
@@ -97,7 +99,7 @@ public class AddProduct extends AppCompatActivity implements
 
             } else {
                 imageUri = null;
-                image.setImageURI(imageUri);
+                image.setImageURI(null);
                 Toast.makeText(getApplicationContext(),"La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
                 btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
             }
@@ -205,8 +207,6 @@ public class AddProduct extends AppCompatActivity implements
                 if(pushedImage){
                     int stockInt = Integer.parseInt(stock.getText().toString());
                     double priceDouble = Double.parseDouble(price.getText().toString());
-                    StorageReference dataPath = storageReference.child("images").child(imageUri.getLastPathSegment());
-                    String urlImage = dataPath.getPath();
 
                     dbGestiPedi.insertProduct(name.getText().toString(), description.getText().toString(), stockInt, priceDouble, imageUri.toString(), category, urlImage);
                     startActivity(new Intent(getApplicationContext(),StockActivity.class));
