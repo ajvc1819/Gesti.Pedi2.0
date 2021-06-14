@@ -192,8 +192,8 @@ public class EditProduct extends AppCompatActivity implements
                     btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.buttons_style, null));
                 }
             } else {
+                image.setImageURI(null);
                 imageUri = null;
-                image.setImageURI(imageUri);
                 pushedImage = false;
                 btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
                 Toast.makeText(getApplicationContext(), "La imagen seleccionada ya está asignada a un producto.", Toast.LENGTH_SHORT).show();
@@ -309,7 +309,6 @@ public class EditProduct extends AppCompatActivity implements
                 pushedImage = true;
                 btnSaveImage.setBackground(ResourcesCompat.getDrawable(res, R.drawable.button_disabled, null));
 
-                dbGestiPedi.updateProductImage(id, imageUri.toString(), urlImage);
                 Toast.makeText(getApplicationContext(), "Imagen guardada con exito.", Toast.LENGTH_SHORT).show();
             } else {
 

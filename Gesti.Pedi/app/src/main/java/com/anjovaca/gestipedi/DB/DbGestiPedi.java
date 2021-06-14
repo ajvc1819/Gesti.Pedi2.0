@@ -362,22 +362,6 @@ public class DbGestiPedi extends SQLiteOpenHelper {
         }
     }
 
-    //Función que permite la edición de los datos de un producto.
-    public void updateProductImage(int id, String image, String urlImage) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        if (db != null) {
-            try {
-                db.execSQL("UPDATE Products " +
-                        "SET image = '" + image + "', urlImage = '" + urlImage +
-                        "'WHERE id = '" + id + "'");
-                db.close();
-            } catch (Exception ex) {
-                Log.d("Tag", ex.toString());
-            }
-        }
-    }
-
     //Función que permite la eliminación de un producto de la base de datos.
     public void deleteProduct(int idProduct, Context context) {
         SQLiteDatabase db = getWritableDatabase();
